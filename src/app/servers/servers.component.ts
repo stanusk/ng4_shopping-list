@@ -6,9 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./servers.component.scss']
 })
 export class ServersComponent {
+  private DEF_SERV_NAME = '';
+
   allowAddServer = false;
-  newServerName = '';
+  newServerName = this.DEF_SERV_NAME;
   serverCreated = false;
+
+  servers: Array<string> = ['Test server', 'Some other server'];
 
   constructor () {
     setTimeout(() => this.allowAddServer = true, 2000);
@@ -16,9 +20,8 @@ export class ServersComponent {
 
   onServerCreation () {
     this.serverCreated = true;
-  }
 
-  // onUpdateNewServerName (event: Event) {
-  //   this.newServerName = (<HTMLInputElement>event.target).value;
-  // }
+    this.servers.push(this.newServerName);
+    this.newServerName = this.DEF_SERV_NAME;
+  }
 }

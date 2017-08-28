@@ -1,0 +1,62 @@
+<div *ngIf="!recipe">
+  <div class="row">
+    <div class="col-xs-12">
+      <p>No recipe selected.</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="recipe">
+  <div class="row">
+    <div class="col-xs-12">
+      <img [src]="recipe.imagePath" [alt]="recipe.name" class="img-responsive">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>
+        {{ recipe.name }}
+      </h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="btn-group">
+        <button class="btn btn-primary dropdown-toggle">
+          Manage Recipe
+          <span class="caret"></span>
+        </button>
+      </div>
+
+      <ul class="dropdown-menu">
+        <li>
+          <a href="">Add Ingredient</a>
+        </li>
+        <li>
+          <a href="">Edit</a>
+        </li>
+        <li>
+          <a href="">Delete</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      {{ recipe.description }}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <ul>
+        <li *ngFor="let ingredient of recipe.ingredients">
+          {{ ingredient.name }} ({{ ingredient.quantity }})
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

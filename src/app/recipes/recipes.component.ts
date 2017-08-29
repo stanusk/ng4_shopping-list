@@ -31,20 +31,27 @@ export class RecipesComponent implements OnInit {
   }
 
   getRecipes (): Array<Recipe> {
-    const mock = this.MOCK_getRecipe();
-    return [mock];
+    return this.MOCK_getRecipes();
   }
 
   onRecipeSelected (recipe: Recipe) {
     this.selectedRecipe = recipe;
   }
 
-  private MOCK_getRecipe (): Recipe {
-    return newRecipe({
-      name: 'gule',
-      description: 'gule na vode',
-      ingredients: [{name: 'varlata', quantity: 2}],
-      imagePath: 'https://upload.wikimedia.org/wikipedia/commons/4/47/A_mix_of_veggies_and_fried_balls%21%21.JPG'
-    });
+  private MOCK_getRecipes (): Array<Recipe> {
+    return [
+      newRecipe({
+        name: 'gule',
+        description: 'gule na vode',
+        ingredients: [{name: 'varlata', quantity: 2}],
+        imagePath: 'https://upload.wikimedia.org/wikipedia/commons/e/ec/Curry_Fish_Balls.jpg'
+      }),
+      newRecipe({
+        name: 'vajcia',
+        description: 'ehm',
+        ingredients: [{name: 'bykove varlata', quantity: 6}],
+        imagePath: 'https://upload.wikimedia.org/wikipedia/commons/3/37/Criadillas_de_Choto-_Madrid.jpg'
+      })
+    ];
   }
 }

@@ -9,17 +9,12 @@
 <div class="row">
   <div class="col-xs-12">
     <hr>
-    <a
+
+    <app-recipe-list-item
       *ngFor="let recipe of recipes"
+
       (click)="onSelect(recipe)"
-      href="#"
-      class="list-group-item clearfix"
-    >
-
-      <app-recipe-list-item
-        [recipe]="recipe"
-      ></app-recipe-list-item>
-
-    </a>
+      [recipe]="recipe"
+    ></app-recipe-list-item>
   </div>
 </div>

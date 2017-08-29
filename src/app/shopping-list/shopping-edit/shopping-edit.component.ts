@@ -29,7 +29,6 @@ export class ShoppingEditComponent implements OnChanges {
   }
 
   onChange () {
-    console.log(this.editedItem);
     this.changeItem.emit(<Ingredient>this.editedItem);
     this.reset();
   }
@@ -42,6 +41,10 @@ export class ShoppingEditComponent implements OnChanges {
   reset () {
     this.editedItem = {name: '', quantity: null};
     this.shoppingListItem = null;
+  }
+
+  areIdentical (a: any, b: any): boolean {
+    return _.isEqual(a, b);
   }
 
 }

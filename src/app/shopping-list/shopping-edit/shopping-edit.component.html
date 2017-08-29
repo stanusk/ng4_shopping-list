@@ -42,7 +42,7 @@
           <button
             class="btn btn-success"
             *ngIf="editedItem.id"
-            [disabled]="!f.valid || editedItem === shoppingListItem"
+            [disabled]="!f.valid || areIdentical(editedItem, shoppingListItem)"
             (click)="onChange()"
           >
             Save change

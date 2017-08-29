@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Ingredient, newIngredient} from '../shared-models/ingredient.model';
 import {NewItem} from './shopping-edit/shopping-edit.component';
-import * as _ from 'lodash';
 
 @Component({
   selector: 'app-shopping-list',

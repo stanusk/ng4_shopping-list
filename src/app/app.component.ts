@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
+  visibleSection: string;
+  private DEF_SECTION = 'shoppingList';
+
+  constructor () {
+    this.visibleSection = this.DEF_SECTION;
+  }
+
+  onNav (selectedSection: string) {
+    this.visibleSection = selectedSection;
+  }
 }

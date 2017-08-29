@@ -1,13 +1,20 @@
 
-<app-header></app-header>
+<app-header
+  [visibleSection]="visibleSection"
+  (navigate)="onNav($event)"
+></app-header>
 
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
 
-      <app-recipes></app-recipes>
+      <app-recipes
+        *ngIf="visibleSection === 'recipes'"
+      ></app-recipes>
 
-      <app-shopping-list></app-shopping-list>
+      <app-shopping-list
+        *ngIf="visibleSection === 'shoppingList'"
+      ></app-shopping-list>
 
     </div>
   </div>

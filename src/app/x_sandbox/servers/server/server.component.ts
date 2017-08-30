@@ -1,32 +1,33 @@
-
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-server',
-  templateUrl: 'server.component.html',
-  styles: [`
-    .online {
-      color: white;
-    }
-  `]
+	selector: 'app-server',
+	templateUrl: 'server.component.html',
+	styles: [`
+        .online {
+            color: white;
+        }
+	`]
 })
 export class ServerComponent {
-  @Input() server;
-  @Input() set someChangingInput (o: {s: string}) {
-    console.log(o.s);
-  };
+	@Input() server;
 
-  serverStatus: string;
+	@Input()
+	set someChangingInput (o: { s: string }) {
+		console.log(o.s);
+	};
 
-  constructor () {
-    this.serverStatus = Math.random() > 0.5 ? 'online' : 'offline';
-  }
+	serverStatus: string;
 
-  getServerStatus (): string {
-    return this.serverStatus;
-  }
+	constructor () {
+		this.serverStatus = Math.random() > 0.5 ? 'online' : 'offline';
+	}
 
-  getColor () {
-    return this.serverStatus === 'online' ? 'green' : 'red';
-  }
+	getServerStatus (): string {
+		return this.serverStatus;
+	}
+
+	getColor () {
+		return this.serverStatus === 'online' ? 'green' : 'red';
+	}
 }

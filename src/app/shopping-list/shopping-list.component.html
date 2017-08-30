@@ -1,23 +1,23 @@
 <div class="row">
-  <div class="col-xs-10">
-    <app-shopping-edit
-      [itemToEdit]="itemToEdit"
-      (addNewItem)="onAddNewItem($event)"
-      (changeItem)="onChangeItem($event)"
-      (deleteItem)="onDeleteItem($event)"
-    ></app-shopping-edit>
+	<div class="col-xs-10">
+		<app-shopping-edit
+				[itemToEdit]="itemToEdit"
+				(addNewItem)="onAddNewItem($event)"
+				(changeItem)="onChangeItem($event)"
+				(deleteItem)="onDeleteItem($event)"
+		></app-shopping-edit>
 
-    <hr>
+		<hr>
 
-    <div class="list-group">
-      <a
-        *ngFor="let item of shoppingItems"
-        (click)="editItem(item)"
-        class="list-group-item"
-      >
-        {{ item.name }} ({{ item.quantity }})
-      </a>
-    </div>
+		<div class="list-group">
+			<a
+					*ngFor="let item of shoppingItems"
+					(click)="editItem(item)"
+					class="list-group-item"
+			>
+				{{ item.name }} ({{ item.quantity }})
+			</a>
+		</div>
 
-  </div>
+	</div>
 </div>

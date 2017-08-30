@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import {ServerComponent} from './x_sandbox/servers/server/server.component';
+import { ServerComponent } from './x_sandbox/servers/server/server.component';
 import { ServersComponent } from './x_sandbox/servers/servers.component';
 import { HeaderComponent } from './header/header.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
@@ -18,28 +18,28 @@ import { UnlessDirective } from './x_sandbox/directives/unless.directive';
 import { DropdownDirective } from './shared/directives/dropdown.directive';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ServerComponent,
-    ServersComponent,
-    HeaderComponent,
-    ShoppingListComponent,
-    RecipeListComponent,
-    RecipeDetailComponent,
-    RecipesComponent,
-    RecipeListItemComponent,
-    ShoppingEditComponent,
+	declarations: [
+		AppComponent,
+		ServerComponent,
+		ServersComponent,
+		HeaderComponent,
+		ShoppingListComponent,
+		RecipeListComponent,
+		RecipeDetailComponent,
+		RecipesComponent,
+		RecipeListItemComponent,
+		ShoppingEditComponent,
 
-    HoverBorderDirective,
-    UnlessDirective,
-    DropdownDirective
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+		HoverBorderDirective,
+		UnlessDirective,
+		DropdownDirective
+	],
+	imports: [
+		BrowserModule,
+		FormsModule,
+		HttpModule
+	],
+	providers: [],
+	bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

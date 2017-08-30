@@ -1,20 +1,20 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+	selector: 'app-header',
+	templateUrl: './header.component.html',
+	styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  @Input() visibleSection: string;
-  @Output() navigate = new EventEmitter<string>();
+	@Input() visibleSection: string;
+	@Output() navigate = new EventEmitter<string>();
 
-  constructor() { }
+	constructor () { }
 
-  ngOnInit() {
-  }
+	ngOnInit () {
+	}
 
-  onNav (target: string) {
-    this.navigate.emit(target);
-  }
+	onNav (target: string) {
+		this.navigate.emit(target);
+	}
 }

@@ -1,22 +1,22 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Recipe} from '../../shared/models/recipe.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Recipe } from '../../shared/models/recipe.model';
 
 @Component({
-  selector: 'app-recipe-list',
-  templateUrl: './recipe-list.component.html',
-  styleUrls: ['./recipe-list.component.scss']
+	selector: 'app-recipe-list',
+	templateUrl: './recipe-list.component.html',
+	styleUrls: ['./recipe-list.component.scss']
 })
 export class RecipeListComponent implements OnInit {
-  @Input() recipes: Array<Recipe>;
-  @Output() recipeSelected = new EventEmitter<Recipe>();
+	@Input() recipes: Array<Recipe>;
+	@Output() recipeSelected = new EventEmitter<Recipe>();
 
-  constructor() {
-  }
+	constructor () {
+	}
 
-  ngOnInit() {
-  }
+	ngOnInit () {
+	}
 
-  onSelect (recipe: Recipe) {
-    this.recipeSelected.emit(recipe);
-  }
+	onSelect (recipe: Recipe) {
+		this.recipeSelected.emit(recipe);
+	}
 }

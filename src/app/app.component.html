@@ -1,6 +1,6 @@
 <app-header
-		[visibleSection]="visibleSection"
-		(navigate)="onNav($event)"
+	[visibleSection]="visibleSection"
+	(navigate)="onNav($event)"
 ></app-header>
 
 <div class="container">
@@ -8,11 +8,11 @@
 		<div class="col-xs-12">
 
 			<app-recipes
-					*ngIf="visibleSection === 'recipes'"
+				*ngIf="visibleSection === 'recipes'"
 			></app-recipes>
 
 			<app-shopping-list
-					*ngIf="visibleSection === 'shoppingList'"
+				*ngIf="visibleSection === 'shoppingList'"
 			></app-shopping-list>
 
 			<!--<app-servers></app-servers>-->

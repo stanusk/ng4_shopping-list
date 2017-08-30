@@ -6,15 +6,15 @@
 	Server name
 
 	<input
-			class="form-control"
-			[(ngModel)]="newServerName"
+		class="form-control"
+		[(ngModel)]="newServerName"
 	>
 </label>
 
 <button
-		[disabled]="!allowAddServer"
-		(click)="onServerCreation()"
-		class="btn btn-primary"
+	[disabled]="!allowAddServer"
+	(click)="onServerCreation()"
+	class="btn btn-primary"
 >
 	Add server
 </button>
@@ -31,9 +31,9 @@
 <!--&gt;</app-server>-->
 
 <app-server
-		*ngFor="let server of servers"
-		[server]="server"
-		[someChangingInput]="objectWithChangingProp"
+	*ngFor="let server of servers"
+	[server]="server"
+	[someChangingInput]="objectWithChangingProp"
 
 ></app-server>
 

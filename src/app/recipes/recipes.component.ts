@@ -7,13 +7,13 @@ import { newRecipe, Recipe } from '../shared/models/recipe.model';
 		<div class="row">
 			<div class="col col-xs-5">
 				<app-recipe-list
-						[recipes]="recipes"
-						(recipeSelected)="onRecipeSelected($event)"
+					[recipes]="recipes"
+					(recipeSelected)="onRecipeSelected($event)"
 				></app-recipe-list>
 			</div>
 			<div class="col col-xs-7">
 				<app-recipe-detail
-						[recipe]="selectedRecipe"
+					[recipe]="selectedRecipe"
 				></app-recipe-detail>
 			</div>
 		</div>

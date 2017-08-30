@@ -4,10 +4,10 @@
 </label>
 
 <p
-		*appUnless="hide.checked"
-		[appBasicBorder]="['black', 'blue', 'magenta', 'yellow']"
-		[ngStyle]="{'background-color': getColor()}"
-		[ngClass]="{'online': serverStatus === 'online'}"
+	*appUnless="hide.checked"
+	[appBasicBorder]="['black', 'blue', 'magenta', 'yellow']"
+	[ngStyle]="{'background-color': getColor()}"
+	[ngClass]="{'online': serverStatus === 'online'}"
 >
 	{{ 'Server' }} {{ server }} is {{ getServerStatus() }}
 

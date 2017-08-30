@@ -15,6 +15,7 @@ import { RecipeListItemComponent } from './recipes/recipe-list/recipe-list-item/
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { HoverBorderDirective } from './x_sandbox/directives/hoverBorder.directive';
 import { UnlessDirective } from './x_sandbox/directives/unless.directive';
+import { DropdownDirective } from './shared/directives/dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { UnlessDirective } from './x_sandbox/directives/unless.directive';
     ShoppingEditComponent,
 
     HoverBorderDirective,
-    UnlessDirective
+    UnlessDirective,
+    DropdownDirective
   ],
   imports: [
     BrowserModule,

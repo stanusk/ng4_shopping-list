@@ -1,5 +1,5 @@
 import {Component, ViewChild, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
-import {Ingredient} from '../../shared-models/ingredient.model';
+import {Ingredient} from '../../shared/models/ingredient.model';
 import * as _ from 'lodash';
 
 @Component({

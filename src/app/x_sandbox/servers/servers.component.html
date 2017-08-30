@@ -23,8 +23,18 @@
   Server: "{{ newServerName }}" created.
 </p>
 
+<!--<app-server-->
+  <!--*ngFor="let server of servers"-->
+  <!--[server]="server"-->
+  <!--[someChangingInput]="newServerName"-->
+
+<!--&gt;</app-server>-->
+
 <app-server
   *ngFor="let server of servers"
+  [server]="server"
+  [someChangingInput]="objectWithChangingProp"
+
 ></app-server>
 
 

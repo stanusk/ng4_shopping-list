@@ -1,13 +1,22 @@
 
-<!--<p-->
-  <!--[style.color]="serverStatus === 'online' ? 'green' : 'red'"-->
-<!--&gt;-->
-  <!--{{ 'Server' }} with id {{ serverId }} is {{ getServerStatus() }}-->
-<!--</p>-->
+<label>
+  <input type="checkbox" #hide ngModel>
+  hide
+</label>
 
 <p
+  *appUnless="hide.checked"
+  [appBasicBorder]="['black', 'blue', 'magenta', 'yellow']"
   [ngStyle]="{'background-color': getColor()}"
   [ngClass]="{'online': serverStatus === 'online'}"
 >
-  {{ 'Server' }} with id {{ serverId }} is {{ getServerStatus() }}
+  {{ 'Server' }} {{ server }} is {{ getServerStatus() }}
+
+  <span [ngSwitch]="true">
+    <span *ngSwitchCase="server.length < 2">really short</span>
+    <span *ngSwitchCase="server.length >= 2 && server.length < 5">short</span>
+    <span *ngSwitchCase="server.length >= 5 && server.length < 10">optimal</span>
+    <span *ngSwitchCase="server.length >= 10">long</span>
+  </span>
+
 </p>

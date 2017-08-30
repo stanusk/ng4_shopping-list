@@ -9,12 +9,18 @@ export class ServersComponent {
   private DEF_SERV_NAME = '';
 
   allowAddServer = false;
-  newServerName = this.DEF_SERV_NAME;
+
+
+  objectWithChangingProp = {s: 'default'};
+  newServerName: string;
+
   serverCreated = false;
 
   servers: Array<string> = ['Test server', 'Some other server'];
 
+
   constructor () {
+    this.newServerName = this.DEF_SERV_NAME;
     setTimeout(() => this.allowAddServer = true, 2000);
   }
 

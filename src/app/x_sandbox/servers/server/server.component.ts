@@ -1,5 +1,5 @@
 
-import {Component} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-server',
@@ -11,7 +11,11 @@ import {Component} from '@angular/core';
   `]
 })
 export class ServerComponent {
-  serverId = 10;
+  @Input() server;
+  @Input() set someChangingInput (o: {s: string}) {
+    console.log(o.s);
+  };
+
   serverStatus: string;
 
   constructor () {

@@ -16,4 +16,8 @@ export class RecipeDetailComponent implements OnInit {
 		this.recipeService.recipeSelected.subscribe((r: Recipe) => this.recipe = r);
 	}
 
+	addToShoppingList () {
+		this.recipeService.toShoppingList(this.recipe.ingredients);
+	}
+
 }

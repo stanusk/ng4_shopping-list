@@ -40,15 +40,17 @@
 					<span class="caret"></span>
 				</button>
 
-				<ul class="dropdown-menu">
-					<li>
-						<a href="#">Add Ingredient</a>
+				<ul class="dropdown-menu recipe-menu">
+					<li
+						(click)="addToShoppingList()"
+					>
+						<a>Add Ingredient</a>
 					</li>
 					<li>
-						<a href="#">Edit</a>
+						<a>Edit</a>
 					</li>
 					<li>
-						<a href="#">Delete</a>
+						<a>Delete</a>
 					</li>
 				</ul>
 

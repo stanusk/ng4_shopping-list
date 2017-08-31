@@ -21,6 +21,11 @@ export class ShoppingListService {
 		this.itemsChange.emit(_.cloneDeep(this.items));
 	}
 
+	addIngredients (ingredients: Array<Ingredient>) {
+		this.items.push(...ingredients);
+		this.emitChange();
+	}
+
 	addNewItem (itemDataObj: NewItem) {
 		this.items.push(newIngredient(itemDataObj));
 		this.emitChange();

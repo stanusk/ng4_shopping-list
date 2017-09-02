@@ -18,6 +18,8 @@ import { UnlessDirective } from './x_sandbox/directives/unless.directive';
 import { DropdownDirective } from './shared/directives/dropdown.directive';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { RecipesService } from './recipes/recipes.service';
+import { AppRoutingModule } from './app-routing.module';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 
 @NgModule({
 	declarations: [
@@ -34,12 +36,14 @@ import { RecipesService } from './recipes/recipes.service';
 
 		HoverBorderDirective,
 		UnlessDirective,
-		DropdownDirective
+		DropdownDirective,
+		RecipeEditComponent
 	],
 	imports: [
 		BrowserModule,
 		FormsModule,
-		HttpModule
+		HttpModule,
+		AppRoutingModule
 	],
 	providers: [
 		ShoppingListService,

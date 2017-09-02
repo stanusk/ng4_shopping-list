@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Recipe } from '../../shared/models/recipe.model';
-import { RecipesService } from '../recipes.service';
 
 @Component({
 	selector: 'app-recipe-list',
@@ -9,10 +8,4 @@ import { RecipesService } from '../recipes.service';
 })
 export class RecipeListComponent {
 	@Input() recipes: Array<Recipe>;
-
-	constructor (private recipeService: RecipesService) {}
-
-	onSelect (recipe: Recipe) {
-		this.recipeService.recipeSelected.emit(recipe);
-	}
 }

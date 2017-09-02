@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { newRecipe, Recipe } from '../shared/models/recipe.model';
 import * as _ from 'lodash';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
@@ -8,10 +8,13 @@ import { Ingredient } from '../shared/models/ingredient.model';
 export class RecipesService {
 	private recipes: Array<Recipe> = [];
 
-	public recipeSelected = new EventEmitter<Recipe>();
-
 	constructor (private shService: ShoppingListService) {
 		this.recipes = this.MOCK_getRecipes();
+	}
+
+	getRecipe (id: number): Recipe {
+		const recipe = this.recipes.find(r => r.id === id);
+		return _.cloneDeep(recipe);
 	}
 
 	getRecipes (): Array<Recipe> {

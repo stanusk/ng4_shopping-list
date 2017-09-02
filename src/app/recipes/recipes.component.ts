@@ -12,7 +12,7 @@ import { RecipesService } from './recipes.service';
 				></app-recipe-list>
 			</div>
 			<div class="col col-xs-7">
-				<app-recipe-detail></app-recipe-detail>
+				<router-outlet></router-outlet>
 			</div>
 		</div>
 	`

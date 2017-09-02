@@ -2,8 +2,32 @@ import { Component } from '@angular/core';
 
 @Component({
 	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss']
+	template: `
+
+		<app-header
+			[visibleSection]="visibleSection"
+			(navigate)="onNav($event)"
+		></app-header>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+
+					<app-recipes
+						*ngIf="visibleSection === 'recipes'"
+					></app-recipes>
+
+					<app-shopping-list
+						*ngIf="visibleSection === 'shoppingList'"
+					></app-shopping-list>
+
+					<!--<app-servers></app-servers>-->
+
+				</div>
+			</div>
+		</div>
+		
+	`
 })
 export class AppComponent {
 	visibleSection: string;

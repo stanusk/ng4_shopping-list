@@ -20,6 +20,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { RecipesService } from './recipes/recipes.service';
 import { AppRoutingModule } from './app-routing.module';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { NoRecipeSelectedComponent } from './recipes/no-recipe-selected/no-recipe-selected.component';
 
 @NgModule({
 	declarations: [
@@ -37,7 +38,8 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
 		HoverBorderDirective,
 		UnlessDirective,
 		DropdownDirective,
-		RecipeEditComponent
+		RecipeEditComponent,
+		NoRecipeSelectedComponent
 	],
 	imports: [
 		BrowserModule,

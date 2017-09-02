@@ -25,5 +25,4 @@ export class RecipeDetailComponent implements OnInit {
 	addToShoppingList () {
 		this.recipeService.toShoppingList(this.recipe.ingredients);
 	}
-
 }

@@ -22,12 +22,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { NoRecipeSelectedComponent } from './recipes/no-recipe-selected/no-recipe-selected.component';
 import { SandboxComponent } from './x_sandbox/sandbox.component';
+import { ObservablesHomeComponent } from './x_sandbox/observables-home/observables-home.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		ServerComponent,
-		ServersComponent,
 		HeaderComponent,
 		ShoppingListComponent,
 		RecipeListComponent,
@@ -37,11 +36,19 @@ import { SandboxComponent } from './x_sandbox/sandbox.component';
 		ShoppingEditComponent,
 		RecipeEditComponent,
 		NoRecipeSelectedComponent,
+
+		DropdownDirective,
+
+
+
+		// sandbox
+		ServerComponent,
+		ServersComponent,
 		SandboxComponent,
+		ObservablesHomeComponent,
 
 		HoverBorderDirective,
-		UnlessDirective,
-		DropdownDirective
+		UnlessDirective
 	],
 	imports: [
 		BrowserModule,

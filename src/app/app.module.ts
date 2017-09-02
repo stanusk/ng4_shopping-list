@@ -21,6 +21,7 @@ import { RecipesService } from './recipes/recipes.service';
 import { AppRoutingModule } from './app-routing.module';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { NoRecipeSelectedComponent } from './recipes/no-recipe-selected/no-recipe-selected.component';
+import { SandboxComponent } from './x_sandbox/sandbox.component';
 
 @NgModule({
 	declarations: [
@@ -34,12 +35,13 @@ import { NoRecipeSelectedComponent } from './recipes/no-recipe-selected/no-recip
 		RecipesComponent,
 		RecipeListItemComponent,
 		ShoppingEditComponent,
+		RecipeEditComponent,
+		NoRecipeSelectedComponent,
+		SandboxComponent,
 
 		HoverBorderDirective,
 		UnlessDirective,
-		DropdownDirective,
-		RecipeEditComponent,
-		NoRecipeSelectedComponent
+		DropdownDirective
 	],
 	imports: [
 		BrowserModule,

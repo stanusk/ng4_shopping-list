@@ -1,6 +1,8 @@
 export class Commodity {
-	constructor (public name: string,
-	             readonly id: number) {}
+	constructor (
+		public name: string,
+		readonly id: number
+	) {}
 }
 
 let lastCommodityId = 0;

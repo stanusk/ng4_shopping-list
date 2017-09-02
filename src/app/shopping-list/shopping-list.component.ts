@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Ingredient } from '../shared/models/ingredient.model';
 import { NewItem } from './shopping-edit/shopping-edit.component';
 import { ShoppingListService } from './shopping-list.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
 	selector: 'app-shopping-list',
 	templateUrl: './shopping-list.component.html',
 	styleUrls: ['./shopping-list.component.scss']
 })
-export class ShoppingListComponent implements OnInit {
+export class ShoppingListComponent implements OnInit, OnDestroy {
+	private subs: Array<Subscription>;
 	shoppingItems: Array<Ingredient> = [];
 
 	itemToEdit: Ingredient;
@@ -18,8 +20,10 @@ export class ShoppingListComponent implements OnInit {
 	ngOnInit () {
 		this.shoppingItems = this.slService.getItems();
 
-		this.slService.itemsChange
-			.subscribe(items => this.shoppingItems = items);
+		this.subs = [
+			this.slService.itemsChange
+				.subscribe(items => this.shoppingItems = items)
+		];
 	}
 
 	editItem (item: Ingredient) {
@@ -42,4 +46,7 @@ export class ShoppingListComponent implements OnInit {
 		this.itemToEdit = null;
 	}
 
+	ngOnDestroy () {
+		this.subs.forEach(s => s.unsubscribe());
+	}
 }

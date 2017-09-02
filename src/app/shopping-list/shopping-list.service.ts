@@ -1,13 +1,14 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Ingredient, newIngredient } from '../shared/models/ingredient.model';
 import { NewItem } from './shopping-edit/shopping-edit.component';
 import * as _ from 'lodash';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class ShoppingListService {
 	private items: Array<Ingredient> = [];
 
-	public itemsChange = new EventEmitter<Array<Ingredient>>();
+	public itemsChange = new Subject<Array<Ingredient>>();
 
 	constructor () {
 		this.items = this.MOCK_makeItems();
@@ -18,7 +19,7 @@ export class ShoppingListService {
 	}
 
 	emitChange () {
-		this.itemsChange.emit(_.cloneDeep(this.items));
+		this.itemsChange.next(_.cloneDeep(this.items));
 	}
 
 	addIngredients (ingredients: Array<Ingredient>) {

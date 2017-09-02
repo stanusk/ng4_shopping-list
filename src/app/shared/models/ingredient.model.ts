@@ -30,18 +30,6 @@ export class Ingredient {
 		this._quantity = quantity || 1;
 		this.id = id;
 	}
-
-	addOne (): number {
-		return ++this._quantity;
-	}
-
-	removeOne (): number {
-		if (this._quantity > 1) {
-			this._quantity--;
-		}
-
-		return this._quantity;
-	}
 }
 
 let lastIngredientId = 0;

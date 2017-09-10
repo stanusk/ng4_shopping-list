@@ -9,6 +9,7 @@ export class ShoppingListService {
 	private items: Array<Ingredient> = [];
 
 	public itemsChange = new Subject<Array<Ingredient>>();
+	public editingItem = new Subject<number>();
 
 	constructor () {
 		this.items = this.MOCK_makeItems();
@@ -16,6 +17,10 @@ export class ShoppingListService {
 
 	getItems (): Array<Ingredient> {
 		return _.cloneDeep(this.items);
+	}
+
+	getItem (id: number): Ingredient {
+		return this.items.find(i => i.id === id);
 	}
 
 	emitChange () {
@@ -32,10 +37,10 @@ export class ShoppingListService {
 		this.emitChange();
 	}
 
-	changeItem (newItem: Ingredient) {
-		const oldItemPos = this.items.findIndex(i => i.id === newItem.id);
+	changeItem (itemId: number, newItem: NewItem) {
+		const oldItemPos = this.items.findIndex(i => i.id === itemId);
 
-		this.items[oldItemPos] = newItem;
+		this.items[oldItemPos] = newIngredient(newItem);
 		this.emitChange();
 	}
 

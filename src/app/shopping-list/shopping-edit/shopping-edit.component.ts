@@ -1,50 +1,62 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Ingredient } from '../../shared/models/ingredient.model';
-import * as _ from 'lodash';
+import { NgForm } from '@angular/forms';
+import { ShoppingListService } from '../shopping-list.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
 	selector: 'app-shopping-edit',
 	templateUrl: './shopping-edit.component.html',
 	styleUrls: ['./shopping-edit.component.scss']
 })
-export class ShoppingEditComponent implements OnChanges {
-	@Input('itemToEdit') shoppingListItem: Ingredient;
-	@Output() addNewItem = new EventEmitter<NewItem>();
-	@Output() changeItem = new EventEmitter<Ingredient>();
-	@Output() deleteItem = new EventEmitter<number>();
+export class ShoppingEditComponent implements OnInit, OnDestroy {
+	@ViewChild('f') form: NgForm;
 
-	@ViewChild('f') form: HTMLFormElement;
+	public editMode = false;
+	public editedItem: Ingredient;
 
-	public editedItem: { name: string, quantity: number, id?: number } = {name: '', quantity: null};
+	private subscription: Subscription;
 
-	ngOnChanges (changes: SimpleChanges) {
-		if (changes.shoppingListItem && changes.shoppingListItem.currentValue) {
-			this.editedItem = _.cloneDeep(changes.shoppingListItem.currentValue);
-		}
+	constructor (private slService: ShoppingListService) {}
+
+	ngOnInit () {
+		this.subscription = this.slService.editingItem
+			.subscribe(itemId => {
+				this.editMode = true;
+				this.editedItem = this.slService.getItem(itemId);
+				this.form.setValue({
+					name: this.editedItem.name,
+					quantity: this.editedItem.quantity
+				});
+			});
 	}
 
-	onAddNew () {
-		this.addNewItem.emit(this.editedItem);
+	ngOnDestroy () {
+		this.subscription.unsubscribe();
+	}
+
+	onAddNew (newItem: NewItem) {
+		this.slService.addNewItem(newItem);
 		this.reset();
 	}
 
-	onChange () {
-		this.changeItem.emit(<Ingredient>this.editedItem);
+	onUpdate (newItem: NewItem) {
+		this.slService.changeItem(this.editedItem.id, newItem);
 		this.reset();
 	}
 
-	onDelete () {
-		this.deleteItem.emit(this.editedItem.id);
+	onDelete (id) {
+		this.slService.deleteItem(id);
 		this.reset();
 	}
 
 	reset () {
-		this.editedItem = {name: '', quantity: null};
-		this.shoppingListItem = null;
+		this.form.reset();
+		this.editMode = false;
 	}
 
-	areIdentical (a: any, b: any): boolean {
-		return _.isEqual(a, b);
+	areEqual (formItem, editedItem): boolean {
+		return formItem.name === this.editedItem.name && formItem.quantity === this.editedItem.quantity;
 	}
 
 }

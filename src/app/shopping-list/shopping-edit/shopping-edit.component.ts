@@ -56,7 +56,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
 	}
 
 	areEqual (formItem, editedItem): boolean {
-		return formItem.name === this.editedItem.name && formItem.quantity === this.editedItem.quantity;
+		return formItem.name === editedItem.name && formItem.quantity === editedItem.quantity;
 	}
 
 }

@@ -1,15 +1,34 @@
 import { Injectable } from '@angular/core';
-import { newRecipe, Recipe } from '../shared/models/recipe.model';
+import { newRecipe, NewRecipeProps, Recipe } from '../shared/models/recipe.model';
 import * as _ from 'lodash';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Ingredient } from '../shared/models/ingredient.model';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class RecipesService {
+	recipesChange = new Subject();
+
 	private recipes: Array<Recipe> = [];
 
 	constructor (private shService: ShoppingListService) {
 		this.recipes = this.MOCK_getRecipes();
+	}
+
+	addRecipe (recipeData: NewRecipeProps) {
+		this.recipes.push(newRecipe(recipeData));
+		this.recipesChange.next(_.cloneDeep(this.recipes));
+	}
+
+	updateRecipe (id, recipeData) {
+		const recipePosition = this.recipes.findIndex(r => r.id === id);
+		this.recipes[recipePosition] = newRecipe(recipeData);
+		this.recipesChange.next(_.cloneDeep(this.recipes));
+	}
+
+	deleteRecipe (id: number) {
+		this.recipes = this.recipes.filter(r => r.id !== id);
+		this.recipesChange.next(_.cloneDeep(this.recipes));
 	}
 
 	getRecipe (id: number): Recipe {

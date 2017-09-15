@@ -44,6 +44,9 @@ export class Recipe {
 let lastRecipeId = 0;
 
 export function newRecipe (newRecipeProps: NewRecipeProps) {
+	if ('id' in newRecipeProps) {
+		return new Recipe(<RecipeConstructorProps>newRecipeProps);
+	}
 	return new Recipe(Object.assign(newRecipeProps, {id: ++lastRecipeId}));
 }
 
@@ -57,11 +60,12 @@ interface RecipeConstructorProps extends NewRecipeProps {
 	id: number;
 }
 
-interface NewRecipeProps {
+export interface NewRecipeProps {
 	name: string;
 	ingredients?: RecipeNewIngredients;
 	description: string;
 	imagePath: string;
+	id?: number;
 }
 
 type RecipeNewIngredients = Array<IngredientSourceData | Ingredient>;

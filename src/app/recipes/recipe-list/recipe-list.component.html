@@ -14,8 +14,9 @@
 		<hr>
 
 		<app-recipe-list-item
-			*ngFor="let recipe of recipes"
+			*ngFor="let recipe of recipes; let index = index"
 			[recipe]="recipe"
+			[recipeIndex]="index"
 		></app-recipe-list-item>
 	</div>
 </div>

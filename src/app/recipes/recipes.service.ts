@@ -17,17 +17,17 @@ export class RecipesService {
 
 	addRecipe (recipe: Recipe) {
 		this.recipes.push(recipe);
-		this.recipesChange.next(_.cloneDeep(this.recipes));
+		this.emitRecipeChange();
 	}
 
 	updateRecipe (index: number, recipe: Recipe) {
 		this.recipes[index] = recipe;
-		this.recipesChange.next(_.cloneDeep(this.recipes));
+		this.emitRecipeChange();
 	}
 
 	deleteRecipe (index: number) {
-		this.recipes = this.recipes.splice(index, 1);
-		this.recipesChange.next(_.cloneDeep(this.recipes));
+		this.recipes.splice(index, 1);
+		this.emitRecipeChange();
 	}
 
 	getRecipe (index: number): Recipe {
@@ -40,6 +40,10 @@ export class RecipesService {
 
 	toShoppingList (ingredients: Array<Ingredient>) {
 		this.slService.addIngredients(ingredients);
+	}
+
+	private emitRecipeChange () {
+		this.recipesChange.next(_.cloneDeep(this.recipes));
 	}
 
 	private MOCK_getRecipes (): Array<Recipe> {

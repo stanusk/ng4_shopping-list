@@ -44,7 +44,7 @@
 						class="btn btn-success"
 						*ngIf="editMode"
 						[disabled]="!f.valid || areEqual(f.value, editedItem)"
-						(click)="onUpdate(f.value)"
+						(click)="onUpdate(editedItemIndex, f.value)"
 					>
 						Update
 					</button>
@@ -52,7 +52,7 @@
 					<button
 						class="btn btn-danger"
 						*ngIf="editMode"
-						(click)="onDelete(editedItem.id)"
+						(click)="onDelete(editedItemIndex)"
 					>
 						Delete
 					</button>

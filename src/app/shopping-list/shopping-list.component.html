@@ -6,8 +6,8 @@
 
 		<div class="list-group">
 			<a
-				*ngFor="let item of shoppingItems"
-				(click)="editItem(item.id)"
+				*ngFor="let item of shoppingItems; let index = index"
+				(click)="editItem(index)"
 				class="list-group-item"
 			>
 				{{ item.name }} ({{ item.quantity }})

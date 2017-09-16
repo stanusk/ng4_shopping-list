@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Ingredient, newIngredient } from '../shared/models/ingredient.model';
-import { NewItem } from './shopping-edit/shopping-edit.component';
+import { Ingredient } from '../shared/models/ingredient.model';
 import * as _ from 'lodash';
 import { Subject } from 'rxjs/Subject';
 
@@ -19,8 +18,8 @@ export class ShoppingListService {
 		return _.cloneDeep(this.items);
 	}
 
-	getItem (id: number): Ingredient {
-		return this.items.find(i => i.id === id);
+	getItem (index: number): Ingredient {
+		return _.cloneDeep(this.items[index]);
 	}
 
 	emitChange () {
@@ -32,28 +31,26 @@ export class ShoppingListService {
 		this.emitChange();
 	}
 
-	addNewItem (itemDataObj: NewItem) {
-		this.items.push(newIngredient(itemDataObj));
+	addNewItem (ingredient: Ingredient) {
+		this.items.push(ingredient);
 		this.emitChange();
 	}
 
-	changeItem (itemId: number, newItem: NewItem) {
-		const oldItemPos = this.items.findIndex(i => i.id === itemId);
-
-		this.items[oldItemPos] = newIngredient(newItem);
+	changeItem (index: number, ingredient: Ingredient) {
+		this.items[index] = ingredient;
 		this.emitChange();
 	}
 
-	deleteItem (id: number) {
-		this.items = this.items.filter(i => i.id !== id);
+	deleteItem (index: number) {
+		this.items.splice(index, 1);
 		this.emitChange();
 	}
 
 	MOCK_makeItems (): Array<Ingredient> {
 		return [
-			newIngredient({name: 'muka', quantity: 200}),
-			newIngredient({name: 'vajce', quantity: 2}),
-			newIngredient({name: 'sol', quantity: 1})
+			{name: 'muka', quantity: 200},
+			{name: 'vajce', quantity: 2},
+			{name: 'sol', quantity: 1}
 		];
 	}
 

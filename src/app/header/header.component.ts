@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { RecipesService } from '../recipes/recipes.service';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
 	selector: 'app-header',
@@ -6,4 +9,30 @@ import { Component } from '@angular/core';
 	styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+	constructor (
+		private recipesService: RecipesService,
+		private shoppingListService: ShoppingListService
+	) {}
+
+	saveAllData () {
+		Observable.merge(
+			this.recipesService.saveRecipes(),
+			this.shoppingListService.saveItems()
+		)
+			.subscribe(result => {
+				console.log(result);
+			})
+		;
+	}
+
+	getAllData () {
+		Observable.merge(
+			this.recipesService.loadRecipes(),
+			this.shoppingListService.loadItems()
+			)
+			.subscribe(result => {
+				console.log(result);
+			})
+		;
+	}
 }

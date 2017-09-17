@@ -4,6 +4,9 @@ import * as _ from 'lodash';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Ingredient } from '../shared/models/ingredient.model';
 import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
+import { FirebaseService } from '../shared/firebase.service';
+import { Response } from '@angular/http';
 
 @Injectable()
 export class RecipesService {
@@ -11,9 +14,10 @@ export class RecipesService {
 
 	private recipes: Array<Recipe> = [];
 
-	constructor (private slService: ShoppingListService) {
-		this.recipes = this.MOCK_getRecipes();
-	}
+	constructor (
+		private slService: ShoppingListService,
+		private firebaseService: FirebaseService
+	) {}
 
 	addRecipe (recipe: Recipe) {
 		this.recipes.push(recipe);
@@ -40,6 +44,37 @@ export class RecipesService {
 
 	toShoppingList (ingredients: Array<Ingredient>) {
 		this.slService.addIngredients(ingredients);
+	}
+
+	saveRecipes (): Observable<Response> {
+		const response$ = this.firebaseService
+			.save('recipes', this.recipes)
+			.share();
+
+		response$.subscribe();
+
+		return response$;
+	}
+
+	loadRecipes () {
+		const recipes$ = this.firebaseService
+			.load('recipes')
+			.map(response => response.json())
+			.map(recipes => recipes.map(r => {
+				r.ingredients = r.ingredients || [];
+				return r;
+			}))
+			.share()
+		;
+
+		recipes$.subscribe(
+			(recipes: Array<Recipe>) => {
+				this.recipes = recipes;
+				this.emitRecipeChange();
+			}
+		);
+
+		return recipes$;
 	}
 
 	private emitRecipeChange () {

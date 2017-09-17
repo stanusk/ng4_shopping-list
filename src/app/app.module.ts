@@ -23,6 +23,7 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
 import { NoRecipeSelectedComponent } from './recipes/no-recipe-selected/no-recipe-selected.component';
 import { SandboxComponent } from './x_sandbox/sandbox.component';
 import { ObservablesHomeComponent } from './x_sandbox/observables-home/observables-home.component';
+import { FirebaseService } from './shared/firebase.service';
 
 @NgModule({
 	declarations: [
@@ -59,7 +60,8 @@ import { ObservablesHomeComponent } from './x_sandbox/observables-home/observabl
 	],
 	providers: [
 		ShoppingListService,
-		RecipesService
+		RecipesService,
+		FirebaseService
 	],
 	bootstrap: [AppComponent]
 })

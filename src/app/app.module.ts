@@ -24,6 +24,8 @@ import { NoRecipeSelectedComponent } from './recipes/no-recipe-selected/no-recip
 import { SandboxComponent } from './x_sandbox/sandbox.component';
 import { ObservablesHomeComponent } from './x_sandbox/observables-home/observables-home.component';
 import { FirebaseService } from './shared/firebase.service';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
 
 @NgModule({
 	declarations: [
@@ -49,7 +51,9 @@ import { FirebaseService } from './shared/firebase.service';
 		ObservablesHomeComponent,
 
 		HoverBorderDirective,
-		UnlessDirective
+		UnlessDirective,
+		SignupComponent,
+		SigninComponent
 	],
 	imports: [
 		BrowserModule,

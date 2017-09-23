@@ -4,6 +4,8 @@ import { RecipesService } from '../recipes.service';
 import { FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Recipe } from '../../shared/models/recipe.model';
 import { Ingredient } from '../../shared/models/ingredient.model';
+import { Observable } from 'rxjs/Observable';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
 	selector: 'app-recipe-edit',
@@ -11,6 +13,8 @@ import { Ingredient } from '../../shared/models/ingredient.model';
 	styleUrls: ['./recipe-edit.component.scss']
 })
 export class RecipeEditComponent implements OnInit {
+	isAuthenticated$: Observable<boolean>;
+
 	public editMode = false;
 
 	public recipeForm: FormGroup;
@@ -27,10 +31,13 @@ export class RecipeEditComponent implements OnInit {
 	constructor (
 		private route: ActivatedRoute,
 		private router: Router,
-		private recipesService: RecipesService
+		private recipesService: RecipesService,
+		private authService: AuthService
 	) { }
 
 	ngOnInit () {
+		this.isAuthenticated$ = this.authService.isAuthenticated();
+
 		this.editedRecipeId = +this.route.snapshot.params['id'];
 		const editedRecipe = this.recipesService.getRecipe(this.editedRecipeId);
 

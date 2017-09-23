@@ -3,6 +3,7 @@
 		<button
 			routerLink="new"
 			class="btn btn-success"
+			[disabled]="!(isAuthenticated$ | async)"
 		>
 			New Recipe
 		</button>

@@ -12,18 +12,16 @@ export class FirebaseService {
 
 	constructor (
 		private http: Http,
-		private auth: AuthService
+		private authService: AuthService
 	) {}
 
 	save (dataType: string, data: any): Observable<Response> {
-		const token = this.auth.getToken();
-
-		return this.http.put(`${this.dbUrl}/${dataType}.json?auth=${token}`, data);
+		return this.authService.getToken()
+			.switchMap(token => this.http.put(`${this.dbUrl}/${dataType}.json?auth=${token}`, data));
 	}
 
 	load (dataType: string): Observable<Response> {
-		const token = this.auth.getToken();
-
-		return this.http.get(`${this.dbUrl}/${dataType}.json?auth=${token}`);
+		return this.authService.getToken()
+			.switchMap(token => this.http.get(`${this.dbUrl}/${dataType}.json?auth=${token}`));
 	}
 }

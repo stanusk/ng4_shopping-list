@@ -2,6 +2,11 @@ import * as ShoppingListActions from './shopping-list.actions';
 import { Ingredient } from '../../shared/models/ingredient.model';
 import * as _ from 'lodash';
 
+export interface ShoppingListState {
+	items: Array<Ingredient>;
+	editedItemIndex: number;
+}
+
 const initialItems: Array<Ingredient> = [
 	{name: 'muka', quantity: 200},
 	{name: 'vajco', quantity: 2},
@@ -47,11 +52,6 @@ export function shoppingListReducer (
 		default:
 			return state;
 	}
-}
-
-export interface ShoppingListState {
-	items: Array<Ingredient>;
-	editedItemIndex: number;
 }
 
 function editIngredient (state: ShoppingListState, changedIngredient: Ingredient): ShoppingListState {

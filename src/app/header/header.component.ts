@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RecipesService } from '../recipes/recipes.service';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Observable } from 'rxjs/Observable';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
 	selector: 'app-header',
@@ -9,9 +10,11 @@ import { Observable } from 'rxjs/Observable';
 	styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+
 	constructor (
 		private recipesService: RecipesService,
-		private shoppingListService: ShoppingListService
+		private shoppingListService: ShoppingListService,
+		public authService: AuthService
 	) {}
 
 	saveAllData () {

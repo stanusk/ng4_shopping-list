@@ -5,6 +5,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { authReducer, AuthState } from './auth/store/auth.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './auth/store/auth.effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { environment } from '../environments/environment';
 
 export interface AppState {
 	shoppingList: ShoppingListState;
@@ -19,8 +21,9 @@ const appReducers: ActionReducerMap<AppState> = {
 @NgModule({
 	imports: [
 		StoreModule.forRoot(appReducers),
-		StoreDevtoolsModule.instrument(),
-		EffectsModule.forRoot([AuthEffects])
+		!environment.production ? StoreDevtoolsModule.instrument() : [],
+		EffectsModule.forRoot([AuthEffects]),
+		StoreRouterConnectingModule
 	],
 	exports: [
 		StoreModule

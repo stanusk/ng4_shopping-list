@@ -9,6 +9,7 @@ import { NoRecipeSelectedComponent } from './recipes/no-recipe-selected/no-recip
 import { SandboxComponent } from './x_sandbox/sandbox.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { AuthGuard } from './auth/auth-guard.service';
 
 const routing: Routes = [
 	{ path: '', pathMatch: 'full', redirectTo: '/shopping-list' },
@@ -18,9 +19,9 @@ const routing: Routes = [
 		component: RecipesComponent,
 		children: [
 			{ path: '', component: NoRecipeSelectedComponent, pathMatch: 'full' },
-			{ path: 'new', component: RecipeEditComponent },
+			{ path: 'new', component: RecipeEditComponent, canActivate: [AuthGuard] },
 			{ path: ':id', component: RecipeDetailComponent },
-			{ path: ':id/edit', component: RecipeEditComponent }
+			{ path: ':id/edit', component: RecipeEditComponent, canActivate: [AuthGuard] }
 		]
 	},
 	{ path: 'sandbox', component: SandboxComponent },

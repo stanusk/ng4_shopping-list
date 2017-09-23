@@ -28,6 +28,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth-guard.service';
+import { AppStoreModule } from './app-store.module';
 
 @NgModule({
 	declarations: [
@@ -62,7 +63,8 @@ import { AuthGuard } from './auth/auth-guard.service';
 		FormsModule,
 		HttpModule,
 		AppRoutingModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		AppStoreModule
 	],
 	providers: [
 		ShoppingListService,

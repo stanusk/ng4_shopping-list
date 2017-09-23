@@ -3,6 +3,9 @@ import { Ingredient } from '../../shared/models/ingredient.model';
 import { NgForm } from '@angular/forms';
 import { ShoppingListService } from '../shopping-list.service';
 import { Subscription } from 'rxjs/Subscription';
+import { AppState } from '../../app-store.module';
+import { Store } from '@ngrx/store';
+import { ShoppingListState } from '../store/shopping-list.reducers';
 
 @Component({
 	selector: 'app-shopping-edit',
@@ -12,43 +15,44 @@ import { Subscription } from 'rxjs/Subscription';
 export class ShoppingEditComponent implements OnInit, OnDestroy {
 	@ViewChild('f') form: NgForm;
 
-	public editMode = false;
-	public editedItem: Ingredient;
-	public editedItemIndex
+	editMode: boolean;
+	editedItem: Ingredient;
 
 	private subscription: Subscription;
 
-	constructor (private slService: ShoppingListService) {}
+	constructor (
+		private slService: ShoppingListService,
+		private store: Store<AppState>
+	) {}
 
 	ngOnInit () {
-		this.subscription = this.slService.editingItem
-			.subscribe(index => {
-				this.editMode = true;
-				this.editedItemIndex = index;
-				this.editedItem = this.slService.getItem(index);
-				this.form.setValue({
-					name: this.editedItem.name,
-					quantity: this.editedItem.quantity
-				});
+		this.subscription = this.store.select('shoppingList')
+			.subscribe((slState: ShoppingListState) => {
+				if (slState.editedItemIndex > -1) {
+					this.editMode = true;
+					this.editedItem = slState.items[slState.editedItemIndex];
+					this.form.setValue(this.editedItem);
+				}
 			});
 	}
 
 	ngOnDestroy () {
 		this.subscription.unsubscribe();
+		this.slService.stopEditingItem();
 	}
 
 	onAddNew (newItem: Ingredient) {
-		this.slService.addNewItem(newItem);
+		this.slService.addItem(newItem);
+		this.form.reset();
+	}
+
+	onUpdate (newItem: Ingredient) {
+		this.slService.changeEditedItem(newItem);
 		this.reset();
 	}
 
-	onUpdate (index: number, newItem: Ingredient) {
-		this.slService.changeItem(index, newItem);
-		this.reset();
-	}
-
-	onDelete (index: number) {
-		this.slService.deleteItem(index);
+	onDelete () {
+		this.slService.deleteEditedItem();
 		this.reset();
 	}
 

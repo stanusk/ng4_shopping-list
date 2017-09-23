@@ -43,7 +43,7 @@ export class RecipesService {
 	}
 
 	toShoppingList (ingredients: Array<Ingredient>) {
-		this.slService.addIngredients(ingredients);
+		this.slService.addItems(ingredients);
 	}
 
 	saveRecipes (): Observable<Response> {

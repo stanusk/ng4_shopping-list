@@ -6,7 +6,7 @@
 
 		<div class="list-group">
 			<a
-				*ngFor="let item of shoppingItems; let index = index"
+				*ngFor="let item of (shoppingItems$ | async); let index = index"
 				(click)="editItem(index)"
 				class="list-group-item"
 			>

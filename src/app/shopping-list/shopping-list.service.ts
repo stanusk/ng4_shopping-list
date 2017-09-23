@@ -1,57 +1,52 @@
 import { Injectable } from '@angular/core';
 import { Ingredient } from '../shared/models/ingredient.model';
-import * as _ from 'lodash';
-import { Subject } from 'rxjs/Subject';
 import { FirebaseService } from '../shared/firebase.service';
 import { Observable } from 'rxjs/Observable';
 import { Response } from '@angular/http';
+import { Store } from '@ngrx/store';
+import { AppState } from '../app-store.module';
+import * as ShoppingListActions from './store/shopping-list.actions';
 
 @Injectable()
 export class ShoppingListService {
-	private items: Array<Ingredient> = [];
-
-	public itemsChange = new Subject<Array<Ingredient>>();
-	public editingItem = new Subject<number>();
 
 	constructor (
-		private firebaseService: FirebaseService
+		private firebaseService: FirebaseService,
+		private store: Store<AppState>
 	) {}
 
-	getItems (): Array<Ingredient> {
-		return _.cloneDeep(this.items);
+	getItems (): Observable<Array<Ingredient>> {
+		return this.store.select('shoppingList', 'items');
 	}
 
-	getItem (index: number): Ingredient {
-		return _.cloneDeep(this.items[index]);
+	addItems (ingredients: Array<Ingredient>) {
+		this.store.next(new ShoppingListActions.AddItems(ingredients));
 	}
 
-	emitChange () {
-		this.itemsChange.next(_.cloneDeep(this.items));
+	addItem (ingredient: Ingredient) {
+		this.store.next(new ShoppingListActions.AddItem(ingredient));
 	}
 
-	addIngredients (ingredients: Array<Ingredient>) {
-		this.items.push(...ingredients);
-		this.emitChange();
+	startEditingItem (itemIndex: number) {
+		this.store.next(new ShoppingListActions.SetEditedItem(itemIndex));
 	}
 
-	addNewItem (ingredient: Ingredient) {
-		this.items.push(ingredient);
-		this.emitChange();
+	stopEditingItem () {
+		this.store.next(new ShoppingListActions.SetEditedItem(-1));
 	}
 
-	changeItem (index: number, ingredient: Ingredient) {
-		this.items[index] = ingredient;
-		this.emitChange();
+	changeEditedItem (ingredient: Ingredient) {
+		this.store.next(new ShoppingListActions.ChangeEditedItem(ingredient));
 	}
 
-	deleteItem (index: number) {
-		this.items.splice(index, 1);
-		this.emitChange();
+	deleteEditedItem () {
+		this.store.next(new ShoppingListActions.DeleteEditedItem());
 	}
 
 	saveItems (): Observable<Response> {
-		const response$ = this.firebaseService
-			.save('shoppingList', this.items)
+		const response$ = this.getItems()
+			.first()
+			.switchMap(items => this.firebaseService.save('shoppingList', items))
 			.share();
 
 		response$.subscribe();
@@ -66,22 +61,10 @@ export class ShoppingListService {
 			.share()
 		;
 
-		items$.subscribe(
-			(items: Array<Ingredient>) => {
-				this.items = items;
-				this.emitChange();
-			}
-		);
+		items$
+			.do((items: Array<Ingredient>) => this.addItems(items))
+			.subscribe();
 
 		return items$;
 	}
-
-	MOCK_makeItems (): Array<Ingredient> {
-		return [
-			{name: 'muka', quantity: 200},
-			{name: 'vajce', quantity: 2},
-			{name: 'sol', quantity: 1}
-		];
-	}
-
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Ingredient } from '../shared/models/ingredient.model';
-import { FirebaseService } from '../shared/firebase.service';
+import { DatabaseService } from '../shared/database.service';
 import { Observable } from 'rxjs/Observable';
 import { Response } from '@angular/http';
 import { Store } from '@ngrx/store';
@@ -11,7 +11,7 @@ import * as ShoppingListActions from './store/shopping-list.actions';
 export class ShoppingListService {
 
 	constructor (
-		private firebaseService: FirebaseService,
+		private firebaseService: DatabaseService,
 		private store: Store<AppState>
 	) {}
 

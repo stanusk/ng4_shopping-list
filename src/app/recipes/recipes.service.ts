@@ -5,7 +5,7 @@ import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Ingredient } from '../shared/models/ingredient.model';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import { FirebaseService } from '../shared/firebase.service';
+import { DatabaseService } from '../shared/database.service';
 import { Response } from '@angular/http';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class RecipesService {
 
 	constructor (
 		private slService: ShoppingListService,
-		private firebaseService: FirebaseService
+		private firebaseService: DatabaseService
 	) {}
 
 	addRecipe (recipe: Recipe) {

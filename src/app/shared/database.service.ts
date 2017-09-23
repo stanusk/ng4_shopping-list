@@ -5,9 +5,8 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../auth/auth.service';
 
-// todo rename to db service
 @Injectable()
-export class FirebaseService {
+export class DatabaseService {
 	private dbUrl = 'https://udemy-course-ng4-7a27a.firebaseio.com';
 
 	constructor (

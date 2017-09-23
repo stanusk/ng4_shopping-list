@@ -23,7 +23,7 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
 import { NoRecipeSelectedComponent } from './recipes/no-recipe-selected/no-recipe-selected.component';
 import { SandboxComponent } from './x_sandbox/sandbox.component';
 import { ObservablesHomeComponent } from './x_sandbox/observables-home/observables-home.component';
-import { FirebaseService } from './shared/firebase.service';
+import { DatabaseService } from './shared/database.service';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { AuthService } from './auth/auth.service';
@@ -69,7 +69,7 @@ import { AppStoreModule } from './app-store.module';
 	providers: [
 		ShoppingListService,
 		RecipesService,
-		FirebaseService,
+		DatabaseService,
 		AuthService,
 		AuthGuard
 	],

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Recipe } from '../../shared/models/recipe.model';
 import * as _ from 'lodash';
-import { ShoppingListService } from '../../shopping-list/shopping-list.service';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Ingredient } from '../../shared/models/ingredient.model';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';

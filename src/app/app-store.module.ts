@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ActionReducerMap, StoreModule } from '@ngrx/store';
-import { shoppingListReducer, ShoppingListState } from './shopping-list/store/shopping-list.reducers';
+import { shoppingListReducer, ShoppingListState } from './modules/shopping-list/store/shopping-list.reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { authReducer, AuthState } from './modules/auth/store/auth.reducers';
 import { EffectsModule } from '@ngrx/effects';

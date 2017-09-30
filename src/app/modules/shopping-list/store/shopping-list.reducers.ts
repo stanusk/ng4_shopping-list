@@ -1,5 +1,5 @@
 import * as ShoppingListActions from './shopping-list.actions';
-import { Ingredient } from '../../shared/models/ingredient.model';
+import { Ingredient } from '../../../shared/models/ingredient.model';
 import * as _ from 'lodash';
 
 export interface ShoppingListState {

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Ingredient } from '../shared/models/ingredient.model';
-import { DatabaseService } from '../shared/database.service';
+import { Ingredient } from '../../shared/models/ingredient.model';
+import { DatabaseService } from '../../shared/database.service';
 import { Observable } from 'rxjs/Observable';
 import { Response } from '@angular/http';
 import { Store } from '@ngrx/store';
-import { AppState } from '../app-store.module';
+import { AppState } from '../../app-store.module';
 import * as ShoppingListActions from './store/shopping-list.actions';
 
 @Injectable()

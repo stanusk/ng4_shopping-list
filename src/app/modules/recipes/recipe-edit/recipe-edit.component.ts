@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipesService } from '../recipes.service';
 import { FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { Recipe } from '../../shared/models/recipe.model';
-import { Ingredient } from '../../shared/models/ingredient.model';
+import { Recipe } from '../../../shared/models/recipe.model';
+import { Ingredient } from '../../../shared/models/ingredient.model';
 import { Observable } from 'rxjs/Observable';
-import { AuthService } from '../../modules/auth/services/auth.service';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
 	selector: 'app-recipe-edit',

@@ -8,37 +8,25 @@ import { ServerComponent } from './x_sandbox/servers/server/server.component';
 import { ServersComponent } from './x_sandbox/servers/servers.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
-import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
-import { RecipesComponent } from './recipes/recipes.component';
-import { RecipeListItemComponent } from './recipes/recipe-list/recipe-list-item/recipe-list-item.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { HoverBorderDirective } from './x_sandbox/directives/hoverBorder.directive';
 import { UnlessDirective } from './x_sandbox/directives/unless.directive';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
-import { RecipesService } from './recipes/recipes.service';
 import { AppRoutingModule } from './app-routing.module';
-import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-import { NoRecipeSelectedComponent } from './recipes/no-recipe-selected/no-recipe-selected.component';
 import { SandboxComponent } from './x_sandbox/sandbox.component';
 import { ObservablesHomeComponent } from './x_sandbox/observables-home/observables-home.component';
 import { DatabaseService } from './shared/database.service';
 import { AppStoreModule } from './app-store.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { SharedModule } from './modules/shared/shared.module';
+import { RecipesModule } from './modules/recipes/recipes.module';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		HeaderComponent,
 		ShoppingListComponent,
-		RecipeListComponent,
-		RecipeDetailComponent,
-		RecipesComponent,
-		RecipeListItemComponent,
 		ShoppingEditComponent,
-		RecipeEditComponent,
-		NoRecipeSelectedComponent,
 
 		// sandbox
 		ServerComponent,
@@ -54,15 +42,14 @@ import { SharedModule } from './modules/shared/shared.module';
 		FormsModule,
 		HttpModule,
 		AppRoutingModule,
-		ReactiveFormsModule,
 		AppStoreModule,
 
 		SharedModule,
-		AuthModule
+		AuthModule,
+		RecipesModule
 	],
 	providers: [
 		ShoppingListService,
-		RecipesService,
 		DatabaseService
 	],
 	bootstrap: [AppComponent]

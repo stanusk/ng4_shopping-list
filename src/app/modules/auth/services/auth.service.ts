@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '../app-store.module';
-import * as AuthActions from './store/auth.actions';
+import { AppState } from '../../../app-store.module';
+import * as AuthActions from '../store/auth.actions';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()

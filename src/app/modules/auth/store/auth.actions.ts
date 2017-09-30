@@ -1,6 +1,6 @@
 
 import { Action } from '@ngrx/store';
-import { UserData } from '../auth.service';
+import { UserData } from '../services/auth.service';
 
 export const SIGNED_UP = 'SIGNED_UP';
 export const SIGNED_IN = 'SIGNED_IN';

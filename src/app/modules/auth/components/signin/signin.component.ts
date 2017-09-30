@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
 	selector: 'app-signin',
-	templateUrl: './signin.component.html',
-	styleUrls: ['./signin.component.scss']
+	templateUrl: './signin.component.html'
 })
 export class SigninComponent implements OnInit {
 

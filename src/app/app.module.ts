@@ -24,11 +24,8 @@ import { NoRecipeSelectedComponent } from './recipes/no-recipe-selected/no-recip
 import { SandboxComponent } from './x_sandbox/sandbox.component';
 import { ObservablesHomeComponent } from './x_sandbox/observables-home/observables-home.component';
 import { DatabaseService } from './shared/database.service';
-import { SignupComponent } from './auth/signup/signup.component';
-import { SigninComponent } from './auth/signin/signin.component';
-import { AuthService } from './auth/auth.service';
-import { AuthGuard } from './auth/auth-guard.service';
 import { AppStoreModule } from './app-store.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @NgModule({
 	declarations: [
@@ -55,8 +52,6 @@ import { AppStoreModule } from './app-store.module';
 
 		HoverBorderDirective,
 		UnlessDirective,
-		SignupComponent,
-		SigninComponent
 	],
 	imports: [
 		BrowserModule,
@@ -64,14 +59,14 @@ import { AppStoreModule } from './app-store.module';
 		HttpModule,
 		AppRoutingModule,
 		ReactiveFormsModule,
-		AppStoreModule
+		AppStoreModule,
+
+		AuthModule
 	],
 	providers: [
 		ShoppingListService,
 		RecipesService,
-		DatabaseService,
-		AuthService,
-		AuthGuard
+		DatabaseService
 	],
 	bootstrap: [AppComponent]
 })

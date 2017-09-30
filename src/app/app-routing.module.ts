@@ -7,9 +7,7 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { NoRecipeSelectedComponent } from './recipes/no-recipe-selected/no-recipe-selected.component';
 import { SandboxComponent } from './x_sandbox/sandbox.component';
-import { SigninComponent } from './auth/signin/signin.component';
-import { SignupComponent } from './auth/signup/signup.component';
-import { AuthGuard } from './auth/auth-guard.service';
+import { AuthGuard } from './modules/auth/services/auth-guard.service';
 
 const routing: Routes = [
 	{ path: '', pathMatch: 'full', redirectTo: '/shopping-list' },
@@ -24,9 +22,7 @@ const routing: Routes = [
 			{ path: ':id/edit', component: RecipeEditComponent, canActivate: [AuthGuard] }
 		]
 	},
-	{ path: 'sandbox', component: SandboxComponent },
-	{ path: 'signin', component: SigninComponent },
-	{ path: 'signup', component: SignupComponent }
+	{ path: 'sandbox', component: SandboxComponent }
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Recipe } from '../../shared/models/recipe.model';
 import { Observable } from 'rxjs/Observable';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../modules/auth/services/auth.service';
 
 @Component({
 	selector: 'app-recipe-list',

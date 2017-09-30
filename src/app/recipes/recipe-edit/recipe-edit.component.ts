@@ -5,7 +5,7 @@ import { FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@ang
 import { Recipe } from '../../shared/models/recipe.model';
 import { Ingredient } from '../../shared/models/ingredient.model';
 import { Observable } from 'rxjs/Observable';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../modules/auth/services/auth.service';
 
 @Component({
 	selector: 'app-recipe-edit',

@@ -3,7 +3,7 @@ import { Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../modules/auth/services/auth.service';
 
 @Injectable()
 export class DatabaseService {

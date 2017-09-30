@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import * as AuthActions from './auth.actions';
-import { UserData } from '../auth.service';
+import { UserData } from '../services/auth.service';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';

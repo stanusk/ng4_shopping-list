@@ -15,7 +15,6 @@ import { RecipeListItemComponent } from './recipes/recipe-list/recipe-list-item/
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { HoverBorderDirective } from './x_sandbox/directives/hoverBorder.directive';
 import { UnlessDirective } from './x_sandbox/directives/unless.directive';
-import { DropdownDirective } from './shared/directives/dropdown.directive';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { RecipesService } from './recipes/recipes.service';
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +25,7 @@ import { ObservablesHomeComponent } from './x_sandbox/observables-home/observabl
 import { DatabaseService } from './shared/database.service';
 import { AppStoreModule } from './app-store.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({
 	declarations: [
@@ -39,10 +39,6 @@ import { AuthModule } from './modules/auth/auth.module';
 		ShoppingEditComponent,
 		RecipeEditComponent,
 		NoRecipeSelectedComponent,
-
-		DropdownDirective,
-
-
 
 		// sandbox
 		ServerComponent,
@@ -61,6 +57,7 @@ import { AuthModule } from './modules/auth/auth.module';
 		ReactiveFormsModule,
 		AppStoreModule,
 
+		SharedModule,
 		AuthModule
 	],
 	providers: [

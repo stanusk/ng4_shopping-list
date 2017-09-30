@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { RecipesService } from '../recipes/recipes.service';
-import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { RecipesService } from '../../recipes/recipes.service';
+import { ShoppingListService } from '../../shopping-list/shopping-list.service';
 import { Observable } from 'rxjs/Observable';
-import { AuthService } from '../modules/auth/services/auth.service';
+import { AuthService } from '../../modules/auth/services/auth.service';
 
 @Component({
 	selector: 'app-header',
-	templateUrl: './header.component.html',
-	styleUrls: ['./header.component.scss']
+	templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
 	isAuthenticated$: Observable<boolean>;

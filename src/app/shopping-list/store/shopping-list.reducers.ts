@@ -7,17 +7,15 @@ export interface ShoppingListState {
 	editedItemIndex: number;
 }
 
-const initialItems: Array<Ingredient> = [
+const MOCK_initialItems: Array<Ingredient> = [
 	{name: 'muka', quantity: 200},
 	{name: 'vajco', quantity: 2},
 	{name: 'sol', quantity: 1}
 ];
 
-const initialEditedItemIndex = -1;
-
 const initialState = {
-	items: initialItems,
-	editedItemIndex: initialEditedItemIndex
+	items: [],
+	editedItemIndex: -1
 };
 
 export function shoppingListReducer (

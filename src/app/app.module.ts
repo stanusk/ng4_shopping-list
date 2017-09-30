@@ -1,3 +1,6 @@
+// todo: do not import all, just what needed
+import 'rxjs/Rx';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';

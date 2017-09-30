@@ -1,16 +1,14 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SandboxComponent } from './x_sandbox/sandbox.component';
 
-const routing: Routes = [
-	{ path: '', pathMatch: 'full', redirectTo: '/shopping-list' },
-	{ path: 'sandbox', component: SandboxComponent }
+const appRoutes: Routes = [
+	{ path: '', pathMatch: 'full', redirectTo: '/shopping-list' }
 ];
 
 @NgModule({
 	imports: [
-		RouterModule.forRoot(routing)
+		RouterModule.forRoot(appRoutes)
 	],
 	exports: [
 		RouterModule

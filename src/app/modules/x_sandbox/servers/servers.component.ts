@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
 	selector: 'app-servers',
-	templateUrl: './servers.component.html',
-	styleUrls: ['./servers.component.scss']
+	templateUrl: './servers.component.html'
 })
 export class ServersComponent {
 	private DEF_SERV_NAME = '';

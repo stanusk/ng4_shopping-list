@@ -6,7 +6,7 @@ import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 
 import { AuthGuard } from './services/auth-guard.service';
-import { AuthService } from './services/auth.service';
+import { AuthService } from '../core/services/auth.service';
 
 import { AuthRoutesModule } from './auth-routes.module';
 

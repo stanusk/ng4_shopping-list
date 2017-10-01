@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { RecipesService } from '../../modules/recipes/recipes.service';
-import { ShoppingListService } from '../../modules/shopping-list/shopping-list.service';
+import { RecipesService } from '../../services/recipes.service';
+import { ShoppingListService } from '../../services/shopping-list.service';
 import { Observable } from 'rxjs/Observable';
-import { AuthService } from '../../modules/auth/services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
 	selector: 'app-header',

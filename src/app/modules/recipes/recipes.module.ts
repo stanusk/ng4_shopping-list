@@ -7,7 +7,7 @@ import { RecipesComponent } from './recipes.component';
 import { RecipeListItemComponent } from './recipe-list/recipe-list-item/recipe-list-item.component';
 import { NoRecipeSelectedComponent } from './no-recipe-selected/no-recipe-selected.component';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
-import { RecipesService } from './recipes.service';
+import { RecipesService } from '../core/services/recipes.service';
 
 import { SharedModule } from '../shared/shared.module';
 import { RecipesRoutesModule } from './recipes-routes.module';

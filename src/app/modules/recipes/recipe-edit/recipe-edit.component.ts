@@ -7,6 +7,8 @@ import { Ingredient } from '../../../shared/models/ingredient.model';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../../auth/services/auth.service';
 
+// todo: rewrite all old private functions to _name with script
+
 @Component({
 	selector: 'app-recipe-edit',
 	templateUrl: './recipe-edit.component.html',
@@ -38,8 +40,7 @@ export class RecipeEditComponent implements OnInit {
 	ngOnInit () {
 		this.isAuthenticated$ = this.authService.isAuthenticated();
 
-		this.editedRecipeId = +this.route.snapshot.params['id'];
-		const editedRecipe = this.recipesService.getRecipe(this.editedRecipeId);
+		this.editedRecipeId = this._idFromParamsSnapshot();
 
 		this.editMode = this.editedRecipeId !== undefined;
 
@@ -53,7 +54,9 @@ export class RecipeEditComponent implements OnInit {
 			]
 		};
 
+		const editedRecipe = this.recipesService.getRecipe(this.editedRecipeId);
 		this.initControls(editedRecipe);
+
 		this.initForm();
 	}
 
@@ -147,6 +150,12 @@ export class RecipeEditComponent implements OnInit {
 
 	private updateRecipe (id: number, recipeData: Recipe) {
 		this.recipesService.updateRecipe(id, recipeData);
+	}
+
+	private _idFromParamsSnapshot (): number {
+		const param = this.route.snapshot.params['id'];
+
+		return param ? +param : undefined;
 	}
 }
 

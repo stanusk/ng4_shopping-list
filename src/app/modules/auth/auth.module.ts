@@ -5,9 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 
-import { AuthGuard } from './services/auth-guard.service';
-import { AuthService } from '../core/services/auth.service';
-
 import { AuthRoutesModule } from './auth-routes.module';
 
 // todo: store, services?
@@ -15,9 +12,6 @@ import { AuthRoutesModule } from './auth-routes.module';
 	declarations: [
 		SignupComponent,
 		SigninComponent
-	],
-	providers: [
-		AuthGuard
 	],
 	imports: [
 		SharedModule,

@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 import { RecipesService } from '../../../core/services/recipes.service';
 import { FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Recipe } from '../../../../shared/models/recipe.model';
 import { Ingredient } from '../../../../shared/models/ingredient.model';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../../../core/services/auth.service';
-
-// todo: rewrite all old private functions to _name with script
 
 @Component({
 	selector: 'app-recipe-edit',
@@ -40,9 +38,8 @@ export class RecipeEditComponent implements OnInit {
 	ngOnInit () {
 		this.isAuthenticated$ = this.authService.isAuthenticated();
 
-		this.editedRecipeId = this._idFromParamsSnapshot();
-
-		this.editMode = this.editedRecipeId !== undefined;
+		this.editMode = this.route.snapshot.url.some((segment: UrlSegment) => segment.path === 'edit');
+		this.editedRecipeId = this.editMode ? +this.route.snapshot.params['id'] : undefined;
 
 		this.ingredientValidators = {
 			name: [
@@ -150,12 +147,6 @@ export class RecipeEditComponent implements OnInit {
 
 	private updateRecipe (id: number, recipeData: Recipe) {
 		this.recipesService.updateRecipe(id, recipeData);
-	}
-
-	private _idFromParamsSnapshot (): number {
-		const param = this.route.snapshot.params['id'];
-
-		return param ? +param : undefined;
 	}
 }
 

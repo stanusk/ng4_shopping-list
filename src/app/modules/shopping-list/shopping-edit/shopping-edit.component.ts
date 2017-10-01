@@ -9,8 +9,7 @@ import { ShoppingListState } from '../store/shopping-list.reducers';
 
 @Component({
 	selector: 'app-shopping-edit',
-	templateUrl: './shopping-edit.component.html',
-	styleUrls: ['./shopping-edit.component.scss']
+	templateUrl: './shopping-edit.component.html'
 })
 export class ShoppingEditComponent implements OnInit, OnDestroy {
 	@ViewChild('f') form: NgForm;

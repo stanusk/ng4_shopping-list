@@ -25,10 +25,10 @@
 			<ul class="nav navbar-nav navbar-right">
 				<ng-template [ngIf]="!(isAuthenticated$ | async)">
 					<li>
-						<a routerLink="/signup">Register</a>
+						<a routerLink="/auth/signup">Register</a>
 					</li>
 					<li>
-						<a routerLink="/signin">Sign in</a>
+						<a routerLink="/auth/signin">Sign in</a>
 					</li>
 				</ng-template>
 				<ng-template [ngIf]="(isAuthenticated$ | async)">

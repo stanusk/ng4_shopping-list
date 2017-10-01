@@ -5,7 +5,8 @@ import { HomeComponent } from './modules/core/components/home/home.component';
 
 const appRoutes: Routes = [
 	{ path: '', pathMatch: 'full', component: HomeComponent },
-	{ path: 'recipes', loadChildren: './modules/recipes/recipes.module#RecipesModule' }
+	{ path: 'recipes', loadChildren: './modules/recipes/recipes.module#RecipesModule' },
+	{ path: 'shopping-list', loadChildren: './modules/shopping-list/shopping-list.module#ShoppingListModule' }
 ];
 
 @NgModule({

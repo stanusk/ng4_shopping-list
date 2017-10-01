@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AuthModule } from './modules/auth/auth.module';
-import { ShoppingListModule } from './modules/shopping-list/shopping-list.module';
 import { CoreModule } from './modules/core/core.module';
 
 @NgModule({
@@ -12,8 +11,7 @@ import { CoreModule } from './modules/core/core.module';
 		CoreModule,
 
 		// todo: lazy loaded
-		AuthModule,
-		ShoppingListModule
+		AuthModule
 	],
 	bootstrap: [AppComponent]
 })

@@ -13,10 +13,12 @@ import { AppRoutingModule } from '../../app-routing.module';
 import { AppStoreModule } from '../../app-store.module';
 import { SharedModule } from '../shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
 	declarations: [
-		HeaderComponent
+		HeaderComponent,
+		HomeComponent
 	],
 	providers: [
 		AuthService,

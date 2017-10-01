@@ -1,5 +1,16 @@
-// todo: do not import all, just what needed
-import 'rxjs/Rx';
+import 'rxjs/Observable';
+import 'rxjs/Subject';
+import 'rxjs/add/observable/fromPromise';
+import 'rxjs/add/observable/merge';
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/operator/share';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/first';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/filter';
+
 
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';

@@ -17,7 +17,6 @@ import { AuthRoutesModule } from './auth-routes.module';
 		SigninComponent
 	],
 	providers: [
-		AuthService,
 		AuthGuard
 	],
 	imports: [

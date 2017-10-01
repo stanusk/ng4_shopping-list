@@ -27,9 +27,6 @@ import { RecipesRoutesModule } from './recipes-routes.module';
 
 		ReactiveFormsModule
 	],
-	exports: [],
-	providers: [
-		RecipesService
-	]
+	exports: []
 })
 export class RecipesModule {}

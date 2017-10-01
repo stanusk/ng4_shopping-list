@@ -16,9 +16,6 @@ import { SharedModule } from '../shared/shared.module';
 		ShoppingListRoutesModule,
 
 		FormsModule
-	],
-	providers: [
-		ShoppingListService
 	]
 })
 export class ShoppingListModule {}

@@ -3,7 +3,6 @@ import 'rxjs/Rx';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
@@ -23,15 +22,14 @@ import { ShoppingListModule } from './modules/shopping-list/shopping-list.module
 	],
 	imports: [
 		BrowserModule,
-		FormsModule,
 		HttpModule,
+
 		AppRoutingModule,
 		AppStoreModule,
 
 		SharedModule,
 		AuthModule,
 		RecipesModule,
-		// todo: remove
 		ShoppingListModule
 	],
 	providers: [

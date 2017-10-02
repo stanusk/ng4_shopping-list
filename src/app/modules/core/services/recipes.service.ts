@@ -6,7 +6,6 @@ import { Ingredient } from '../../../shared/models/ingredient.model';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { DatabaseService } from './database.service';
-import { Response } from '@angular/http';
 
 @Injectable()
 export class RecipesService {
@@ -46,7 +45,7 @@ export class RecipesService {
 		this.slService.addItems(ingredients);
 	}
 
-	saveRecipes (): Observable<Response> {
+	saveRecipes (): Observable<Object> {
 		const response$ = this.firebaseService
 			.save('recipes', this.recipes)
 			.share();
@@ -58,8 +57,7 @@ export class RecipesService {
 
 	loadRecipes () {
 		const recipes$ = this.firebaseService
-			.load('recipes')
-			.map(response => response.json())
+			.load<Array<Recipe>>('recipes')
 			.map(recipes => recipes.map(r => {
 				r.ingredients = r.ingredients || [];
 				return r;

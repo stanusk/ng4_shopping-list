@@ -13,7 +13,8 @@ import 'rxjs/add/operator/filter';
 
 
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { HeaderComponent } from './components/header/header.component';
 import { AuthService } from './services/auth.service';
@@ -23,7 +24,6 @@ import { ShoppingListService } from './services/shopping-list.service';
 import { AppRoutingModule } from '../../app-routing.module';
 import { AppStoreModule } from '../../app-store.module';
 import { SharedModule } from '../shared/shared.module';
-import { BrowserModule } from '@angular/platform-browser';
 import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
@@ -38,8 +38,9 @@ import { HomeComponent } from './components/home/home.component';
 		ShoppingListService
 	],
 	imports: [
-		HttpModule,
 		BrowserModule,
+		HttpClientModule,
+
 		AppRoutingModule,
 		AppStoreModule,
 
@@ -48,8 +49,9 @@ import { HomeComponent } from './components/home/home.component';
 	exports: [
 		HeaderComponent,
 
-		HttpModule,
 		BrowserModule,
+		HttpClientModule,
+
 		AppRoutingModule,
 		AppStoreModule
 	]

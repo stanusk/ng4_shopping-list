@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Ingredient } from '../../../shared/models/ingredient.model';
 import { DatabaseService } from './database.service';
 import { Observable } from 'rxjs/Observable';
-import { Response } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-store.module';
 import * as ShoppingListActions from '../../shopping-list/store/shopping-list.actions';
@@ -43,7 +42,7 @@ export class ShoppingListService {
 		this.store.next(new ShoppingListActions.DeleteEditedItem());
 	}
 
-	saveItems (): Observable<Response> {
+	saveItems (): Observable<Object> {
 		const response$ = this.getItems()
 			.first()
 			.switchMap(items => this.firebaseService.save('shoppingList', items))
@@ -56,8 +55,7 @@ export class ShoppingListService {
 
 	loadItems () {
 		const items$ = this.firebaseService
-			.load('shoppingList')
-			.map(response => response.json())
+			.load<Array<Ingredient>>('shoppingList')
 			.share()
 		;
 

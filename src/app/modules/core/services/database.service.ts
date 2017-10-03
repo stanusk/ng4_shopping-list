@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from './auth.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class DatabaseService {
@@ -13,12 +13,25 @@ export class DatabaseService {
 	) {}
 
 	save (dataType: string, data: any): Observable<Object> {
-		return this.authService.getToken()
-			.switchMap(token => this.httpClient.put(`${this.dbUrl}/${dataType}.json?auth=${token}`, data));
+		return this._getToken(token => {
+			const url = `${this.dbUrl}/${dataType}.json`;
+			const params = new HttpParams().set('auth', token);
+
+			return this.httpClient.put(url, data, {params});
+		});
 	}
 
 	load <T>(dataType: string): Observable<T> {
+		return this._getToken<T>(token => {
+			const url = `${this.dbUrl}/${dataType}.json`;
+			const params = new HttpParams().set('auth', token);
+
+			return this.httpClient.get<T>(url, {params});
+		});
+	}
+
+	private _getToken <T>(fn): Observable<T> {
 		return this.authService.getToken()
-			.switchMap(token => this.httpClient.get<T>(`${this.dbUrl}/${dataType}.json?auth=${token}`));
+			.switchMap(fn);
 	}
 }

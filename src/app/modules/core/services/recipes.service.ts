@@ -11,7 +11,7 @@ import { DatabaseService } from './database.service';
 export class RecipesService {
 	recipesChange = new Subject();
 
-	private recipes: Array<Recipe> = [];
+	private recipes: Array<Recipe> = this.MOCK_getRecipes();
 
 	constructor (
 		private slService: ShoppingListService,
@@ -57,8 +57,8 @@ export class RecipesService {
 
 	loadRecipes () {
 		const recipes$ = this.firebaseService
-			.load<Array<Recipe>>('recipes')
-			.map(recipes => recipes.map(r => {
+			.load('recipes')
+			.map((recipes: Array<Recipe>) => recipes.map(r => {
 				r.ingredients = r.ingredients || [];
 				return r;
 			}))

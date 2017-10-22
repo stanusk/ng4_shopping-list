@@ -1,37 +1,40 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { AuthService } from './auth.service';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 
 @Injectable()
 export class DatabaseService {
 	private dbUrl = 'https://udemy-course-ng4-7a27a.firebaseio.com';
 
+	private _getRequest = this._makeRequestFactory('GET');
+	private _putRequest = this._makeRequestFactory('PUT');
+
 	constructor (
-		private httpClient: HttpClient,
-		private authService: AuthService
+		private httpClient: HttpClient
 	) {}
 
 	save (dataType: string, data: any): Observable<Object> {
-		return this._getToken(token => {
-			const url = `${this.dbUrl}/${dataType}.json`;
-			const params = new HttpParams().set('auth', token);
-
-			return this.httpClient.put(url, data, {params});
-		});
+		return this._putRequest(dataType, data);
 	}
 
-	load <T>(dataType: string): Observable<T> {
-		return this._getToken<T>(token => {
-			const url = `${this.dbUrl}/${dataType}.json`;
-			const params = new HttpParams().set('auth', token);
+	// save (dataType: string, data: any): Observable<Object> {
+	// 	return this.httpClient.put(`${this.dbUrl}/${dataType}.json`, data);
+	// }
 
-			return this.httpClient.get<T>(url, {params});
-		});
+	load (dataType: string): Observable<Object> {
+		return this._getRequest(dataType);
 	}
 
-	private _getToken <T>(fn): Observable<T> {
-		return this.authService.getToken()
-			.switchMap(fn);
+	// load (dataType: string): Observable<Object> {
+	// 	return this.httpClient.get(`${this.dbUrl}/${dataType}.json`);
+	// }
+
+	private _makeRequestFactory (requestType: 'PUT' | 'GET') {
+		return (dataType, data?) => {
+			const url = `${this.dbUrl}/${dataType}.json`;
+			const req = new HttpRequest(requestType, url, data ? data : null);
+
+			return this.httpClient.request(req);
+		};
 	}
 }

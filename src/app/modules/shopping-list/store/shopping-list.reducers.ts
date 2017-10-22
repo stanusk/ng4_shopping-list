@@ -14,7 +14,7 @@ const MOCK_initialItems: Array<Ingredient> = [
 ];
 
 const initialState = {
-	items: [],
+	items: MOCK_initialItems,
 	editedItemIndex: -1
 };
 

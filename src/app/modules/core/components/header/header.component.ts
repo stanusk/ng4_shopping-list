@@ -27,7 +27,8 @@ export class HeaderComponent implements OnInit {
 			this.shoppingListService.saveItems()
 		)
 			.subscribe(result => {
-				console.log(result);
+				// todo: something else than logging
+				// console.log('saveAllData', result);
 			})
 		;
 	}
@@ -38,7 +39,8 @@ export class HeaderComponent implements OnInit {
 			this.shoppingListService.loadItems()
 			)
 			.subscribe(result => {
-				console.log(result);
+				// todo: something else than logging
+				// console.log('getAllData', result);
 			})
 		;
 	}

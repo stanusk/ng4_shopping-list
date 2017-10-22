@@ -55,7 +55,7 @@ export class ShoppingListService {
 
 	loadItems () {
 		const items$ = this.firebaseService
-			.load<Array<Ingredient>>('shoppingList')
+			.load('shoppingList')
 			.share()
 		;
 

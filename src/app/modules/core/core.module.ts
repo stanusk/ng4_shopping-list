@@ -10,10 +10,11 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/toPromise';
 
 
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { HeaderComponent } from './components/header/header.component';
@@ -25,6 +26,7 @@ import { AppRoutingModule } from '../../app-routing.module';
 import { AppStoreModule } from '../../app-store.module';
 import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './components/home/home.component';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 @NgModule({
 	declarations: [
@@ -35,7 +37,8 @@ import { HomeComponent } from './components/home/home.component';
 		AuthService,
 		DatabaseService,
 		RecipesService,
-		ShoppingListService
+		ShoppingListService,
+		{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
 	],
 	imports: [
 		BrowserModule,

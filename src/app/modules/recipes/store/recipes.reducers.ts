@@ -1,5 +1,8 @@
+import * as _ from 'lodash';
+
 import { Recipe } from '../../../shared/models/recipe.model';
 import { AppState } from '../../../app-store.module';
+import { ADD_RECIPE, ADD_RECIPES, DELETE_RECIPE, RecipesActions, UPDATE_RECIPE } from './recipes.actions';
 
 export interface RecipesFeatureState extends AppState {
 	recipes: RecipesState;
@@ -28,9 +31,46 @@ const initialState = {
 	recipes: MOCK_initialRecipes
 };
 
-export function recipesReducer (state: RecipesState = initialState, action) {
+export function recipesReducer (state: RecipesState = initialState, action: RecipesActions) {
 	switch (action.type) {
+		case ADD_RECIPE:
+			return addRecipe(state, action.payload);
+
+		case ADD_RECIPES:
+			return {
+				...state,
+				recipes: action.payload
+			};
+
+		case DELETE_RECIPE:
+			return {
+				...state,
+				recipes: state.recipes.filter((r, index) => index !== action.payload)
+			};
+
+		case UPDATE_RECIPE:
+			return updateRecipe(state, action.payload);
+
 		default:
 			return state;
 	}
+}
+
+function addRecipe (state: RecipesState, newRecipe: Recipe): RecipesState {
+	const recipes = _.cloneDeep(state.recipes);
+
+	return {
+		...state,
+		recipes: recipes.concat(newRecipe)
+	};
+}
+
+function updateRecipe (state: RecipesState, {index, recipe}): RecipesState {
+	const recipes = _.cloneDeep(state.recipes);
+	recipes[index] = recipe;
+
+	return {
+		...state,
+		recipes
+	};
 }

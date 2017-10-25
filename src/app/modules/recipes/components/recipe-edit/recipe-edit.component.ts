@@ -51,13 +51,28 @@ export class RecipeEditComponent implements OnInit {
 			]
 		};
 
-		const editedRecipe = this.recipesService.getRecipe(this.editedRecipeId);
-		this.initControls(editedRecipe);
-
-		this.initForm();
+		this.initForm(this.editMode);
 	}
 
-	initControls (editedRecipe: Recipe | undefined) {
+	initForm (isEditMode: boolean) {
+		if (isEditMode) {
+			this.recipesService.getRecipe(this.editedRecipeId).first()
+				.subscribe((recipe: Recipe) => {
+					this.initControls(recipe);
+				});
+		} else {
+			this.initControls();
+		}
+
+		this.recipeForm = new FormGroup({
+			'name': this.name,
+			'imagePath': this.imagePath,
+			'description': this.description,
+			'ingredients': this.ingredients,
+		});
+	}
+
+	initControls (editedRecipe?: Recipe) {
 		let defaults = {
 			name: '',
 			imagePath: '',
@@ -82,15 +97,6 @@ export class RecipeEditComponent implements OnInit {
 			Validators.required
 		);
 		this.ingredients = new FormArray(defaults.ingredients, Validators.minLength(1));
-	}
-
-	initForm () {
-		this.recipeForm = new FormGroup({
-			'name': this.name,
-			'imagePath': this.imagePath,
-			'description': this.description,
-			'ingredients': this.ingredients,
-		});
 	}
 
 	onSubmit () {

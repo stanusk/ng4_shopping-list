@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../../../../shared/models/recipe.model';
 import { RecipesService } from '../../../core/services/recipes.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
 	selector: 'app-recipe-detail',
@@ -9,8 +10,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 	styleUrls: ['./recipe-detail.component.scss']
 })
 export class RecipeDetailComponent implements OnInit {
-	recipe: Recipe;
-	recipeIndex: number;
+
+	recipe$: Observable<Recipe>;
+	recipeIndex$: Observable<number>;
 
 	constructor (
 		private recipeService: RecipesService,
@@ -19,18 +21,16 @@ export class RecipeDetailComponent implements OnInit {
 	) { }
 
 	ngOnInit () {
-		this.route.params.subscribe(params => {
-			this.recipeIndex = +params['id'];
-			this.recipe = this.recipeService.getRecipe(this.recipeIndex);
-		});
+		this.recipeIndex$ = this.route.params.map(params => +params['id']);
+		this.recipe$ = this.recipeIndex$.switchMap(index => this.recipeService.getRecipe(index));
 	}
 
 	addToShoppingList () {
-		this.recipeService.toShoppingList(this.recipe.ingredients);
+		this.recipe$.first().subscribe(recipe => this.recipeService.toShoppingList(recipe.ingredients));
 	}
 
-	deleteRecipe (index: number) {
-		this.recipeService.deleteRecipe(index);
+	deleteRecipe () {
+		this.recipeIndex$.first().subscribe(index => this.recipeService.deleteRecipe(index));
 		this.goBack();
 	}
 

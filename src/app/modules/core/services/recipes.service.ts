@@ -1,47 +1,46 @@
 import { Injectable } from '@angular/core';
 import { Recipe } from '../../../shared/models/recipe.model';
-import * as _ from 'lodash';
 import { ShoppingListService } from './shopping-list.service';
 import { Ingredient } from '../../../shared/models/ingredient.model';
-import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { DatabaseService } from './database.service';
 import { Store } from '@ngrx/store';
 import { RecipesFeatureState } from '../../recipes/store/recipes.reducers';
+import { AddRecipe, AddRecipes, DeleteRecipe, UpdateRecipe } from '../../recipes/store/recipes.actions';
 
 @Injectable()
 export class RecipesService {
-	recipesChange = new Subject();
-
-	private recipes: Array<Recipe> = [];
-
 	constructor (
 		private slService: ShoppingListService,
 		private firebaseService: DatabaseService,
 		private store: Store<RecipesFeatureState>
 	) {}
 
-	addRecipe (recipe: Recipe) {
-		this.recipes.push(recipe);
-		this.emitRecipeChange();
+	getRecipes (): Observable<Array<Recipe>> {
+		return this.store.select('recipes', 'recipes');
 	}
 
-	updateRecipe (index: number, recipe: Recipe) {
-		this.recipes[index] = recipe;
-		this.emitRecipeChange();
+	getRecipe (index: number): Observable<Recipe> {
+		return this.store
+			.select('recipes', 'recipes')
+			.map((recipes: Array<Recipe>) => recipes.filter((recipe, idx) => index === idx)[0])
+			.share();
+	}
+
+	addRecipe (recipe: Recipe) {
+		this.store.dispatch(new AddRecipe(recipe));
+	}
+
+	addRecipes (recipes: Array<Recipe>) {
+		this.store.dispatch(new AddRecipes(recipes));
 	}
 
 	deleteRecipe (index: number) {
-		this.recipes.splice(index, 1);
-		this.emitRecipeChange();
+		this.store.dispatch(new DeleteRecipe(index));
 	}
 
-	getRecipe (index: number): Recipe {
-		return _.cloneDeep(this.recipes[index]);
-	}
-
-	getRecipes (): Observable<Array<Recipe>> {
-		return this.store.select('recipes', 'recipes');
+	updateRecipe (index: number, recipe: Recipe) {
+		this.store.dispatch(new UpdateRecipe({index, recipe}));
 	}
 
 	toShoppingList (ingredients: Array<Ingredient>) {
@@ -49,8 +48,10 @@ export class RecipesService {
 	}
 
 	saveRecipes (): Observable<Object> {
-		const response$ = this.firebaseService
-			.save('recipes', this.recipes)
+		const response$ = this.store.select('recipes', 'recipes')
+			.first()
+			.switchMap(recipes => this.firebaseService.save('recipes', recipes))
+			.first()
 			.share();
 
 		response$.subscribe();
@@ -61,6 +62,7 @@ export class RecipesService {
 	loadRecipes () {
 		const recipes$ = this.firebaseService
 			.load('recipes')
+			.first()
 			.map((recipes: Array<Recipe>) => recipes.map(r => {
 				r.ingredients = r.ingredients || [];
 				return r;
@@ -70,16 +72,11 @@ export class RecipesService {
 
 		recipes$.subscribe(
 			(recipes: Array<Recipe>) => {
-				this.recipes = recipes;
-				this.emitRecipeChange();
+				this.addRecipes(recipes);
 			}
 		);
 
 		return recipes$;
-	}
-
-	private emitRecipeChange () {
-		this.recipesChange.next(_.cloneDeep(this.recipes));
 	}
 
 }

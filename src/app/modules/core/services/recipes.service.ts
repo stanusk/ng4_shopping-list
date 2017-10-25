@@ -6,16 +6,19 @@ import { Ingredient } from '../../../shared/models/ingredient.model';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { DatabaseService } from './database.service';
+import { Store } from '@ngrx/store';
+import { RecipesFeatureState } from '../../recipes/store/recipes.reducers';
 
 @Injectable()
 export class RecipesService {
 	recipesChange = new Subject();
 
-	private recipes: Array<Recipe> = this.MOCK_getRecipes();
+	private recipes: Array<Recipe> = [];
 
 	constructor (
 		private slService: ShoppingListService,
-		private firebaseService: DatabaseService
+		private firebaseService: DatabaseService,
+		private store: Store<RecipesFeatureState>
 	) {}
 
 	addRecipe (recipe: Recipe) {
@@ -37,8 +40,8 @@ export class RecipesService {
 		return _.cloneDeep(this.recipes[index]);
 	}
 
-	getRecipes (): Array<Recipe> {
-		return _.cloneDeep(this.recipes);
+	getRecipes (): Observable<Array<Recipe>> {
+		return this.store.select('recipes', 'recipes');
 	}
 
 	toShoppingList (ingredients: Array<Ingredient>) {
@@ -77,23 +80,6 @@ export class RecipesService {
 
 	private emitRecipeChange () {
 		this.recipesChange.next(_.cloneDeep(this.recipes));
-	}
-
-	private MOCK_getRecipes (): Array<Recipe> {
-		return [
-			{
-				name: 'gule',
-				description: 'gule na vode',
-				ingredients: [{name: 'varlata', quantity: 2}],
-				imagePath: 'https://upload.wikimedia.org/wikipedia/commons/e/ec/Curry_Fish_Balls.jpg'
-			},
-			{
-				name: 'vajcia',
-				description: 'ehm',
-				ingredients: [{name: 'bykove varlata', quantity: 6}],
-				imagePath: 'https://upload.wikimedia.org/wikipedia/commons/3/37/Criadillas_de_Choto-_Madrid.jpg'
-			}
-		];
 	}
 
 }

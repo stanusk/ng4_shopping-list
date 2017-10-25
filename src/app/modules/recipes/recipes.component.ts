@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Recipe } from '../../shared/models/recipe.model';
 import { RecipesService } from '../core/services/recipes.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
 	selector: 'app-recipes',
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs/Subscription';
 		<div class="row">
 			<div class="col col-xs-5">
 				<app-recipe-list
-					[recipes]="recipes"
+					[recipes]="recipes$ | async"
 				></app-recipe-list>
 			</div>
 			<div class="col col-xs-7">
@@ -18,22 +18,10 @@ import { Subscription } from 'rxjs/Subscription';
 		</div>
 	`
 })
-export class RecipesComponent implements OnInit, OnDestroy {
-	recipes: Array<Recipe> = [];
-	s: Subscription;
+export class RecipesComponent {
+	recipes$: Observable<Array<Recipe>>;
 
-	constructor (private recipesService: RecipesService) { }
-
-	ngOnInit () {
-		this.loadRecipes();
-		this.s = this.recipesService.recipesChange.subscribe((recipes: Array<Recipe>) => { this.recipes = recipes; });
-	}
-
-	ngOnDestroy () {
-		this.s.unsubscribe();
-	}
-
-	loadRecipes () {
-		this.recipes = this.recipesService.getRecipes();
+	constructor (private recipesService: RecipesService) {
+		this.recipes$ = this.recipesService.getRecipes();
 	}
 }

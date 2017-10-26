@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { DatabaseService } from './database.service';
 import { Store } from '@ngrx/store';
 import { RecipesFeatureState } from '../../recipes/store/recipes.reducers';
-import { AddRecipe, AddRecipes, DeleteRecipe, UpdateRecipe } from '../../recipes/store/recipes.actions';
+import { AddRecipe, SetRecipes, DeleteRecipe, UpdateRecipe } from '../../recipes/store/recipes.actions';
 
 @Injectable()
 export class RecipesService {
@@ -31,8 +31,8 @@ export class RecipesService {
 		this.store.dispatch(new AddRecipe(recipe));
 	}
 
-	addRecipes (recipes: Array<Recipe>) {
-		this.store.dispatch(new AddRecipes(recipes));
+	setRecipes (recipes: Array<Recipe>) {
+		this.store.dispatch(new SetRecipes(recipes));
 	}
 
 	deleteRecipe (index: number) {
@@ -72,7 +72,7 @@ export class RecipesService {
 
 		recipes$.subscribe(
 			(recipes: Array<Recipe>) => {
-				this.addRecipes(recipes);
+				this.setRecipes(recipes);
 			}
 		);
 

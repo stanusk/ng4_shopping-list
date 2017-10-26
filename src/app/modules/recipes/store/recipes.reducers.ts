@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 
 import { Recipe } from '../../../shared/models/recipe.model';
 import { AppState } from '../../../app-store.module';
-import { ADD_RECIPE, ADD_RECIPES, DELETE_RECIPE, RecipesActions, UPDATE_RECIPE } from './recipes.actions';
+import { ADD_RECIPE, SET_RECIPES, DELETE_RECIPE, RecipesActions, UPDATE_RECIPE } from './recipes.actions';
 
 export interface RecipesFeatureState extends AppState {
 	recipes: RecipesState;
@@ -36,7 +36,7 @@ export function recipesReducer (state: RecipesState = initialState, action: Reci
 		case ADD_RECIPE:
 			return addRecipe(state, action.payload);
 
-		case ADD_RECIPES:
+		case SET_RECIPES:
 			return {
 				...state,
 				recipes: action.payload

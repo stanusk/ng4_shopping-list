@@ -39,7 +39,7 @@ export function recipesReducer (state: RecipesState = initialState, action: Reci
 		case SET_RECIPES:
 			return {
 				...state,
-				recipes: action.payload
+				recipes: _.cloneDeep(action.payload)
 			};
 
 		case DELETE_RECIPE:
@@ -67,7 +67,7 @@ function addRecipe (state: RecipesState, newRecipe: Recipe): RecipesState {
 
 function updateRecipe (state: RecipesState, {index, recipe}): RecipesState {
 	const recipes = _.cloneDeep(state.recipes);
-	recipes[index] = recipe;
+	recipes[index] = _.cloneDeep(recipe);
 
 	return {
 		...state,

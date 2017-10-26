@@ -34,7 +34,10 @@ const initialState = {
 export function recipesReducer (state: RecipesState = initialState, action: RecipesActions) {
 	switch (action.type) {
 		case ADD_RECIPE:
-			return addRecipe(state, action.payload);
+			return {
+				...state,
+				recipes: [...state.recipes, action.payload]
+			};
 
 		case SET_RECIPES:
 			return {
@@ -56,18 +59,9 @@ export function recipesReducer (state: RecipesState = initialState, action: Reci
 	}
 }
 
-function addRecipe (state: RecipesState, newRecipe: Recipe): RecipesState {
-	const recipes = _.cloneDeep(state.recipes);
-
-	return {
-		...state,
-		recipes: recipes.concat(newRecipe)
-	};
-}
-
 function updateRecipe (state: RecipesState, {index, recipe}): RecipesState {
 	const recipes = _.cloneDeep(state.recipes);
-	recipes[index] = _.cloneDeep(recipe);
+	recipes[index] = {...recipes[index], ..._.cloneDeep(recipe)};
 
 	return {
 		...state,

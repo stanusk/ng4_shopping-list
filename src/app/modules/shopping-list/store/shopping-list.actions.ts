@@ -7,6 +7,9 @@ export const SET_EDITED_ITEM = 'SET_EDITED_ITEM';
 export const CHANGE_EDITED_ITEM = 'CHANGE_EDITED_ITEM';
 export const DELETE_EDITED_ITEM = 'DELETE_EDITED_ITEM';
 
+export const SAVE_ITEMS = 'SAVE_ITEMS';
+export const LOAD_ITEMS = 'LOAD_ITEMS';
+
 export class AddItem implements Action {
 	readonly type = ADD_ITEM;
 	constructor (public payload: Ingredient) {}
@@ -31,4 +34,19 @@ export class DeleteEditedItem implements Action {
 	readonly type = DELETE_EDITED_ITEM;
 }
 
-export type ShoppingListActions = AddItem | AddItems | ChangeEditedItem | SetEditedItem | DeleteEditedItem;
+export class SaveItems implements Action {
+	readonly type = SAVE_ITEMS;
+}
+
+export class LoadItems implements Action {
+	readonly type = LOAD_ITEMS;
+}
+
+export type ShoppingListActions = AddItem
+	| AddItems
+	| ChangeEditedItem
+	| SetEditedItem
+	| DeleteEditedItem
+	| SaveItems
+	| LoadItems
+	;

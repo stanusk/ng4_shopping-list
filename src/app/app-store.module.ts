@@ -7,6 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './modules/auth/store/auth.effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { environment } from '../environments/environment';
+import { ShoppingListEffects } from './modules/shopping-list/store/shopping-list.effects';
 
 export interface AppState {
 	shoppingList: ShoppingListState;
@@ -22,7 +23,7 @@ const appReducers: ActionReducerMap<AppState> = {
 	imports: [
 		StoreModule.forRoot(appReducers),
 		!environment.production ? StoreDevtoolsModule.instrument() : [],
-		EffectsModule.forRoot([AuthEffects]),
+		EffectsModule.forRoot([AuthEffects, ShoppingListEffects]),
 		StoreRouterConnectingModule
 	],
 	exports: [

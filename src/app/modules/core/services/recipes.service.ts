@@ -3,7 +3,6 @@ import { Recipe } from '../../../shared/models/recipe.model';
 import { ShoppingListService } from './shopping-list.service';
 import { Ingredient } from '../../../shared/models/ingredient.model';
 import { Observable } from 'rxjs/Observable';
-import { DatabaseService } from './database.service';
 import { Store } from '@ngrx/store';
 import { RecipesFeatureState } from '../../recipes/store/recipes.reducers';
 import { AddRecipe, SetRecipes, DeleteRecipe, UpdateRecipe, SaveRecipes, LoadRecipes } from '../../recipes/store/recipes.actions';
@@ -12,7 +11,6 @@ import { AddRecipe, SetRecipes, DeleteRecipe, UpdateRecipe, SaveRecipes, LoadRec
 export class RecipesService {
 	constructor (
 		private slService: ShoppingListService,
-		private firebaseService: DatabaseService,
 		private store: Store<RecipesFeatureState>
 	) {}
 

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { DatabaseService } from './database.service';
 import { Store } from '@ngrx/store';
 import { RecipesFeatureState } from '../../recipes/store/recipes.reducers';
-import { AddRecipe, SetRecipes, DeleteRecipe, UpdateRecipe } from '../../recipes/store/recipes.actions';
+import { AddRecipe, SetRecipes, DeleteRecipe, UpdateRecipe, SaveRecipes, LoadRecipes } from '../../recipes/store/recipes.actions';
 
 @Injectable()
 export class RecipesService {
@@ -47,36 +47,12 @@ export class RecipesService {
 		this.slService.addItems(ingredients);
 	}
 
-	saveRecipes (): Observable<Object> {
-		const response$ = this.store.select('recipes', 'recipes')
-			.first()
-			.switchMap(recipes => this.firebaseService.save('recipes', recipes))
-			.first()
-			.share();
-
-		response$.subscribe();
-
-		return response$;
+	saveRecipes () {
+		this.store.dispatch(new SaveRecipes());
 	}
 
 	loadRecipes () {
-		const recipes$ = this.firebaseService
-			.load('recipes')
-			.first()
-			.map((recipes: Array<Recipe>) => recipes.map(r => {
-				r.ingredients = r.ingredients || [];
-				return r;
-			}))
-			.share()
-		;
-
-		recipes$.subscribe(
-			(recipes: Array<Recipe>) => {
-				this.setRecipes(recipes);
-			}
-		);
-
-		return recipes$;
+		this.store.dispatch(new LoadRecipes());
 	}
 
 }

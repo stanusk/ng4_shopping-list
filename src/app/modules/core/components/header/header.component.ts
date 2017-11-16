@@ -22,26 +22,12 @@ export class HeaderComponent implements OnInit {
 	}
 
 	saveAllData () {
-		Observable.merge(
-			this.recipesService.saveRecipes(),
-			this.shoppingListService.saveItems()
-		)
-			.subscribe(result => {
-				// todo: something else than logging
-				// console.log('saveAllData', result);
-			})
-		;
+		this.recipesService.saveRecipes();
+		this.shoppingListService.saveItems();
 	}
 
 	getAllData () {
-		Observable.merge(
-			this.recipesService.loadRecipes(),
-			this.shoppingListService.loadItems()
-			)
-			.subscribe(result => {
-				// todo: something else than logging
-				// console.log('getAllData', result);
-			})
-		;
+		this.recipesService.loadRecipes();
+		this.shoppingListService.loadItems();
 	}
 }
